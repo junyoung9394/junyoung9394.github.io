@@ -1,0 +1,20 @@
+{
+  "name": "LAFC 손흥민 — 엄마 전용 (자동 최신화)",
+  "short_name": "LAFC 엄마",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0b1020",
+  "theme_color": "#0b1020",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
