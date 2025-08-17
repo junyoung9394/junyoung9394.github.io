@@ -1,4 +1,3 @@
 {
-  "sheet_csv_url": "",
-  "timezone": "Asia/Seoul"
+  "apiBase": "https://YOUR_WORKER_SUBDOMAIN.workers.dev"
 }
