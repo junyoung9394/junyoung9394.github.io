@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://junyoung9394.github.io/sitemap.xml
+Sitemap: https://job.luckygrampus.com/sitemap.xml
