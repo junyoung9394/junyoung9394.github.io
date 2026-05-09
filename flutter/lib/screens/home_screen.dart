@@ -4,6 +4,7 @@ import '../data/items.dart';
 import '../models/item.dart';
 import '../widgets/item_detail_sheet.dart';
 import '../widgets/ad_banner_widget.dart';
+import '../widgets/interstitial_ad_manager.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,6 +15,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _searchCtrl = TextEditingController();
+  final _interstitialAd = InterstitialAdManager();
   String _query = '';
   String _selectedCat = '전체';
   List<String> _recentSearches = [];
@@ -224,6 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   item: _results[i],
                   onTap: () {
                     if (_query.isNotEmpty) _saveRecent(_query);
+                    _interstitialAd.onItemOpened();
                     ItemDetailSheet.show(ctx, _results[i]);
                   },
                 ),

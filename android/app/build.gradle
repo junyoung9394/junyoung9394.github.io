@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.junyoung9394.recycle'
+    namespace 'com.junyoung.recycleguide'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.junyoung9394.recycle"
+        applicationId "com.junyoung.recycleguide"
         minSdk 21
         targetSdk 34
         versionCode 1

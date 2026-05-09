@@ -1,41 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'screens/home_screen.dart';
+import 'widgets/app_open_ad_manager.dart';
 
-// ★ AdMob 앱 ID — https://admob.google.com 에서 생성 후 교체
-const String kAdMobAppId = 'ca-app-pub-8518556382646891~REPLACE_APP_ID';
+const String kAdMobAppId = 'ca-app-pub-8518556382646891~6841226198';
+
+final AppOpenAdManager appOpenAdManager = AppOpenAdManager();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await MobileAds.instance.initialize();
+  appOpenAdManager.loadAd();
   runApp(const RecycleApp());
 }
 
-class RecycleApp extends StatelessWidget {
+class RecycleApp extends StatefulWidget {
   const RecycleApp({super.key});
+
+  @override
+  State<RecycleApp> createState() => _RecycleAppState();
+}
+
+class _RecycleAppState extends State<RecycleApp> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      appOpenAdManager.showAdIfAvailable();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '분리수거 가이드',
+      title: '분리수거 끝판왕',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF1a7f4b),
-          brightness: Brightness.light,
         ),
         scaffoldBackgroundColor: const Color(0xFFf0faf4),
         appBarTheme: const AppBarTheme(
           backgroundColor: Color(0xFF1a7f4b),
           foregroundColor: Colors.white,
           elevation: 2,
-        ),
-        chipTheme: ChipThemeData(
-          backgroundColor: const Color(0xFFe8f5ed),
-          labelStyle: const TextStyle(color: Color(0xFF1a7f4b), fontWeight: FontWeight.w600),
-          side: const BorderSide(color: Color(0xFFd1e9da)),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
         ),
         fontFamily: 'sans-serif',
       ),

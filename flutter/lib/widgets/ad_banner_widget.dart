@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-// ★ 실제 배너 광고 단위 ID로 교체 (AdMob 콘솔에서 생성)
-const String _kBannerAdUnitId = 'ca-app-pub-8518556382646891/REPLACE_BANNER_ID';
-
-// 테스트 중엔 아래 ID 사용 (실제 광고 표시 안 됨)
-// const String _kBannerAdUnitId = 'ca-app-pub-3940256099942544/6300978111';
+const String kBannerAdUnitId  = 'ca-app-pub-8518556382646891/2094570082';
+const String kNativeAdUnitId  = 'ca-app-pub-8518556382646891/6963753383';
 
 class AdBannerWidget extends StatefulWidget {
   const AdBannerWidget({super.key});
@@ -22,12 +19,12 @@ class _AdBannerWidgetState extends State<AdBannerWidget> {
   void initState() {
     super.initState();
     _ad = BannerAd(
-      adUnitId: _kBannerAdUnitId,
+      adUnitId: kBannerAdUnitId,
       size: AdSize.banner,
       request: const AdRequest(),
       listener: BannerAdListener(
         onAdLoaded: (_) => setState(() => _loaded = true),
-        onAdFailedToLoad: (ad, error) {
+        onAdFailedToLoad: (ad, _) {
           ad.dispose();
           _ad = null;
         },

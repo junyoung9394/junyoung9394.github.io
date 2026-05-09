@@ -1,5 +1,5 @@
-name: recycle_guide
-description: 분리수거 가이드 — 뭘 어디에 버릴까?
+name: recycleguide
+description: 분리수거 끝판왕 — 뭘 어디에 버릴까?
 publish_to: none
 version: 1.0.0+1
 
@@ -9,9 +9,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  google_mobile_ads: ^5.1.0        # AdMob
-  shared_preferences: ^2.3.2       # 최근 검색어 저장
-  share_plus: ^10.0.0              # 공유 기능
+  google_mobile_ads: ^5.1.0
+  shared_preferences: ^2.3.2
+  share_plus: ^10.0.0
 
 dev_dependencies:
   flutter_test:

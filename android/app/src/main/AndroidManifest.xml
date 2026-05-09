@@ -19,6 +19,11 @@
                 android:name="android.support.customtabs.trusted.DEFAULT_URL"
                 android:value="https://junyoung9394.github.io/recycle/" />
 
+            <!-- AdMob 앱 ID -->
+            <meta-data
+                android:name="com.google.android.gms.ads.APPLICATION_ID"
+                android:value="ca-app-pub-8518556382646891~6841226198"/>
+
             <!-- 상태바 · 네비게이션바 색상 -->
             <meta-data
                 android:name="android.support.customtabs.trusted.STATUS_BAR_COLOR"

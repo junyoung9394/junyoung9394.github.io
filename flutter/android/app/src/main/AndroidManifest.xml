@@ -4,14 +4,14 @@
     <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
 
     <application
-        android:label="분리수거 가이드"
+        android:label="분리수거 끝판왕"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
-        <!-- ★ AdMob 앱 ID — admob.google.com에서 생성 후 교체 -->
+        <!-- AdMob 앱 ID -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-8518556382646891~REPLACE_APP_ID"/>
+            android:value="ca-app-pub-8518556382646891~6841226198"/>
 
         <activity
             android:name=".MainActivity"
