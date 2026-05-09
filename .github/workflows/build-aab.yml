@@ -1,0 +1,51 @@
+name: Build Release AAB
+
+on:
+  workflow_dispatch:          # 수동 실행
+  push:
+    branches: [main]
+    paths: ['android/**']     # android/ 변경 시 자동 빌드
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: gradle/actions/setup-gradle@v3
+
+      - name: Generate Gradle wrapper
+        working-directory: android
+        run: gradle wrapper --gradle-version 8.6 --distribution-type bin
+
+      # GitHub Secrets에서 키스토어 복원
+      # Settings > Secrets and variables > Actions 에서 아래 4개 등록 필요:
+      #   KEYSTORE_BASE64   : base64 인코딩된 .jks 파일
+      #   KEYSTORE_PASSWORD : 키스토어 비밀번호
+      #   KEY_ALIAS         : 키 별칭
+      #   KEY_PASSWORD      : 키 비밀번호
+      - name: Decode keystore
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/keystore.jks
+
+      - name: Build release AAB
+        working-directory: android
+        run: ./gradlew bundleRelease
+        env:
+          KEYSTORE_FILE: keystore.jks
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+
+      - name: Upload AAB artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release-${{ github.sha }}
+          path: android/app/build/outputs/bundle/release/app-release.aab
+          retention-days: 30
