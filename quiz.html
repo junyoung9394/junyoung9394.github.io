@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>직장인 세금 OX 퀴즈 — 연봉·세금·노동법 상식 테스트</title>
+  <meta name="description" content="직장인이라면 알아야 할 연봉·세금·노동법 상식 OX 퀴즈. 매일 5문제, 스트릭을 쌓아보세요!">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://junyoung9394.github.io/quiz.html">
+  <meta property="og:title" content="직장인 세금 OX 퀴즈">
+  <meta property="og:description" content="연봉·세금·노동법 상식 테스트! 매일 5문제로 직장인 지식을 키워보세요.">
+  <meta property="og:image" content="https://junyoung9394.github.io/icons/icon-512.png">
+  <meta property="og:url" content="https://junyoung9394.github.io/quiz.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ko_KR">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/icons/icon-192.png">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="/" class="logo">💰 연봉계산기</a>
+    <nav class="site-nav">
+      <a href="/salary.html">실수령액</a>
+      <a href="/percentile.html">상위몇%</a>
+      <a href="/severance.html">퇴직금</a>
+      <a href="/minimum-wage.html">최저임금</a>
+      <a href="/fortune.html">운세</a>
+      <a href="/quiz.html" class="active">퀴즈</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>직장인 세금 OX 퀴즈</h1>
+    <p class="subtitle">연봉·세금·노동법 상식 5문제 — 매일 새로운 문제!</p>
+
+    <section class="card streak-card">
+      <div class="streak-display">
+        <span class="streak-icon">🔥</span>
+        <span id="streakCount" class="streak-num">0</span>
+        <span class="streak-label">일 연속</span>
+      </div>
+      <p id="streakMsg" class="streak-msg"></p>
+    </section>
+
+    <div id="ad-slot-top" class="ad-slot"></div>
+
+    <div id="quiz-area">
+      <section id="quiz-intro" class="card quiz-intro-card">
+        <p class="quiz-intro-text">직장인이라면 꼭 알아야 할 세금·노동법 상식을 테스트해보세요.<br>오늘의 5문제에 도전!</p>
+        <button id="btnStartQuiz" class="btn-primary">퀴즈 시작하기</button>
+      </section>
+
+      <section id="quiz-question" class="card quiz-card" hidden>
+        <div class="quiz-progress-row">
+          <span id="questionNum" class="quiz-num">1 / 5</span>
+          <div class="quiz-progress-bar"><div id="progressFill" class="quiz-progress-fill" style="width:0%"></div></div>
+        </div>
+        <p id="questionText" class="quiz-text"></p>
+        <div class="quiz-btns">
+          <button id="btnO" class="btn-ox btn-o">⭕ 맞다</button>
+          <button id="btnX" class="btn-ox btn-x">❌ 틀리다</button>
+        </div>
+      </section>
+
+      <section id="quiz-answer" class="card quiz-answer-card" hidden>
+        <div id="answerBadge" class="answer-badge"></div>
+        <p id="answerExplain" class="answer-explain"></p>
+        <button id="btnNextQ" class="btn-primary">다음 문제</button>
+      </section>
+
+      <div id="ad-slot-mid" class="ad-slot"></div>
+
+      <section id="quiz-result" class="card result-card" hidden>
+        <div class="result-headline">
+          <span class="result-label">오늘의 점수</span>
+          <span id="finalScore" class="result-amount">—</span>
+        </div>
+        <p id="resultMsg" class="result-msg"></p>
+        <div class="result-subs">
+          <div class="result-sub"><span class="result-sub-label">연속 일수</span><span id="finalStreak" class="result-sub-val">—</span></div>
+        </div>
+        <div class="share-btns">
+          <button id="btnShareResult" class="btn-share">📤 결과 공유</button>
+          <button id="btnRetry" class="btn-copy">🔄 다시 도전</button>
+        </div>
+      </section>
+    </div>
+
+    <div id="ad-slot-bottom" class="ad-slot"></div>
+
+    <section class="card related-card">
+      <h2 class="section-title">다른 계산기</h2>
+      <div class="related-grid">
+        <a href="/salary.html" class="related-item">💰 연봉 실수령액 계산기</a>
+        <a href="/percentile.html" class="related-item">📊 나는 연봉 상위 몇%?</a>
+        <a href="/severance.html" class="related-item">📋 퇴직금 계산기</a>
+        <a href="/fortune.html" class="related-item">🔮 오늘의 직장인 운세</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 연봉계산기 | <a href="/">홈으로</a></p>
+  </footer>
+
+  <script src="/js/adsense.js"></script>
+  <script src="/js/share.js"></script>
+  <script>
+    // 문제 풀
+    const QUESTIONS = [
+      { q: '연봉 계약서의 연봉에는 4대보험료(근로자 부담분)가 포함된 금액이다.', a: true,  e: '맞습니다. 연봉은 세전 금액으로, 4대보험 및 소득세는 이 금액에서 공제됩니다.' },
+      { q: '주 15시간 미만으로 근무하는 알바생은 주휴수당을 받을 수 없다.', a: true,  e: '맞습니다. 주휴수당은 주 15시간 이상 근무한 경우에만 발생합니다.' },
+      { q: '퇴직금은 재직기간 1년 미만이어도 받을 수 있다.', a: false, e: '틀립니다. 퇴직금은 1년 이상 계속 근무한 경우에만 지급됩니다.' },
+      { q: '국민연금 보험료는 근로자와 사업주가 각각 4.5%씩 부담한다.', a: true,  e: '맞습니다. 국민연금 9% 중 근로자 4.5%, 사업주 4.5%를 각각 부담합니다.' },
+      { q: '연봉이 올라도 4대보험 요율은 변하지 않는다.', a: true,  e: '맞습니다. 요율은 고정되지만 국민연금은 월 기준소득월액 상한이 있습니다.' },
+      { q: '소득세는 연봉이 높을수록 더 높은 세율이 적용된다.', a: true,  e: '맞습니다. 한국은 누진세율 구조로 소득이 높을수록 세율이 높아집니다 (6%~45%).' },
+      { q: '건강보험에는 장기요양보험이 포함된다.', a: true,  e: '맞습니다. 장기요양보험료는 건강보험료의 12.95%로, 건강보험과 함께 고지됩니다.' },
+      { q: '연봉 협상 시 제시하는 금액은 세후 금액이 일반적이다.', a: false, e: '틀립니다. 연봉 협상의 기준은 세전 금액(세금·4대보험 공제 전)이 일반적입니다.' },
+      { q: '퇴직금 300만원 초과 시 IRP(개인형 퇴직연금) 계좌로만 받을 수 있다.', a: true,  e: '맞습니다. 2022년부터 퇴직금이 300만원을 초과하면 반드시 IRP로 지급됩니다.' },
+      { q: '고용보험료는 근로자만 납부하고 사업주는 납부하지 않는다.', a: false, e: '틀립니다. 고용보험은 근로자(0.9%)와 사업주(0.9%+추가)가 함께 납부합니다.' },
+      { q: '연말정산을 통해 납부한 세금보다 더 많이 낸 경우 환급을 받을 수 있다.', a: true,  e: '맞습니다. 연말정산 후 원천징수된 세금이 결정세액보다 많으면 환급됩니다.' },
+      { q: '최저임금은 정규직과 아르바이트에 동일하게 적용된다.', a: true,  e: '맞습니다. 최저임금법은 모든 근로자에게 동일하게 적용됩니다.' },
+      { q: '지방소득세는 소득세와 별도로 납부하며, 소득세의 20%이다.', a: false, e: '틀립니다. 지방소득세는 소득세의 10%입니다.' },
+      { q: '산재보험료는 전액 사업주가 부담한다.', a: true,  e: '맞습니다. 산재보험료는 전액 사업주가 부담하며, 근로자는 납부하지 않습니다.' },
+      { q: '연봉 5천만원과 연봉 5천만원에 성과급 2천만원을 받는 경우의 세율은 같다.', a: false, e: '틀립니다. 성과급도 근로소득에 포함되어 과세되므로, 총 7천만원 기준으로 더 높은 세율이 적용됩니다.' },
+    ];
+
+    // 날짜 시드로 5문제 선택 (매일 같은 문제)
+    function getDailySeed() {
+      const d = new Date();
+      return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+    }
+    function seededShuffle(arr, seed) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor((Math.sin(seed * 9301 + i * 49297 + 233) * 10000 % 1 + 1) % 1 * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+    const todayQuestions = seededShuffle(QUESTIONS, getDailySeed()).slice(0, 5);
+
+    // Streak management
+    function getStreak() {
+      try {
+        const s = JSON.parse(localStorage.getItem('quizStreak') || '{"lastDate":null,"streak":0,"todayDone":false}');
+        const today = new Date().toDateString();
+        if (s.lastDate === today) return s;
+        const yesterday = new Date(Date.now() - 86400000).toDateString();
+        return { lastDate: null, streak: s.lastDate === yesterday ? s.streak : 0, todayDone: false };
+      } catch { return { lastDate: null, streak: 0, todayDone: false }; }
+    }
+    function saveStreak(streak) {
+      localStorage.setItem('quizStreak', JSON.stringify({ lastDate: new Date().toDateString(), streak, todayDone: true }));
+    }
+
+    let streakData = getStreak();
+    document.getElementById('streakCount').textContent = streakData.streak;
+    document.getElementById('streakMsg').textContent = streakData.streak >= 3
+      ? `🔥 ${streakData.streak}일 연속 도전 중! 오늘도 화이팅!`
+      : streakData.streak > 0 ? '어제도 도전했군요! 오늘도 계속하세요.' : '오늘 첫 도전을 시작하세요!';
+
+    // Quiz state
+    let currentQ = 0;
+    let score = 0;
+
+    function showQuestion(idx) {
+      const q = todayQuestions[idx];
+      document.getElementById('questionNum').textContent = `${idx + 1} / 5`;
+      document.getElementById('progressFill').style.width = `${(idx / 5) * 100}%`;
+      document.getElementById('questionText').textContent = q.q;
+      document.getElementById('quiz-question').hidden = false;
+      document.getElementById('quiz-intro').hidden = true;
+      document.getElementById('quiz-answer').hidden = true;
+    }
+
+    function answerQuestion(userAnswer) {
+      const q = todayQuestions[currentQ];
+      const correct = userAnswer === q.a;
+      if (correct) score++;
+
+      document.getElementById('quiz-question').hidden = true;
+      document.getElementById('answerBadge').textContent = correct ? '⭕ 정답!' : '❌ 오답';
+      document.getElementById('answerBadge').className = `answer-badge ${correct ? 'answer-correct' : 'answer-wrong'}`;
+      document.getElementById('answerExplain').textContent = q.e;
+      document.getElementById('quiz-answer').hidden = false;
+
+      insertAd('ad-slot-mid');
+    }
+
+    function nextQuestion() {
+      currentQ++;
+      if (currentQ < 5) {
+        showQuestion(currentQ);
+      } else {
+        finishQuiz();
+      }
+    }
+
+    function finishQuiz() {
+      document.getElementById('quiz-answer').hidden = true;
+      document.getElementById('quiz-question').hidden = true;
+
+      const newStreak = streakData.streak + 1;
+      saveStreak(newStreak);
+      document.getElementById('streakCount').textContent = newStreak;
+
+      const msgs = ['다음에 더 잘할 수 있어요! 💪', '조금 더 공부해봐요! 📚', '절반 성공! 계속 도전하세요 😊', '잘했어요! 거의 다 맞혔네요 👍', '완벽한 점수! 세금 마스터! 🏆'];
+      document.getElementById('finalScore').textContent = `${score} / 5`;
+      document.getElementById('resultMsg').textContent = msgs[score];
+      document.getElementById('finalStreak').textContent = `${newStreak}일 연속`;
+      document.getElementById('quiz-result').hidden = false;
+      document.getElementById('quiz-result').scrollIntoView({ behavior: 'smooth' });
+
+      insertAd('ad-slot-bottom');
+    }
+
+    document.getElementById('btnStartQuiz').addEventListener('click', () => showQuestion(0));
+    document.getElementById('btnO').addEventListener('click', () => answerQuestion(true));
+    document.getElementById('btnX').addEventListener('click', () => answerQuestion(false));
+    document.getElementById('btnNextQ').addEventListener('click', nextQuestion);
+    document.getElementById('btnRetry').addEventListener('click', () => {
+      currentQ = 0; score = 0;
+      document.getElementById('quiz-result').hidden = true;
+      showQuestion(0);
+    });
+    document.getElementById('btnShareResult').addEventListener('click', () => {
+      shareCurrentPage(`직장인 세금 퀴즈 ${score}/5점 달성!`, '당신도 세금 상식 퀴즈에 도전해보세요');
+    });
+
+    window.addEventListener('load', () => insertAd('ad-slot-top'));
+  </script>
+</body>
+</html>

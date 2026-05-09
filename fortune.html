@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>오늘의 직장인 운세 — 직장운·금전운·대인관계운</title>
+  <meta name="description" content="오늘의 직장인 운세. 직장운, 금전운, 대인관계운을 매일 새롭게 확인하세요. 오늘의 행운의 숫자·색깔·키워드도 제공합니다.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://junyoung9394.github.io/fortune.html">
+  <meta property="og:title" content="오늘의 직장인 운세">
+  <meta property="og:description" content="오늘 직장운·금전운·대인관계운 확인하기! 매일 새롭게 업데이트됩니다.">
+  <meta property="og:image" content="https://junyoung9394.github.io/icons/icon-512.png">
+  <meta property="og:url" content="https://junyoung9394.github.io/fortune.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ko_KR">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/icons/icon-192.png">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="/" class="logo">💰 연봉계산기</a>
+    <nav class="site-nav">
+      <a href="/salary.html">실수령액</a>
+      <a href="/percentile.html">상위몇%</a>
+      <a href="/severance.html">퇴직금</a>
+      <a href="/minimum-wage.html">최저임금</a>
+      <a href="/fortune.html" class="active">운세</a>
+      <a href="/quiz.html">퀴즈</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>오늘의 직장인 운세</h1>
+    <p class="subtitle" id="fortuneDate">—</p>
+
+    <section class="card fortune-reveal-card">
+      <button id="btnFortune" class="btn-fortune">🔮 오늘의 운세 확인하기</button>
+    </section>
+
+    <div id="fortune-content" hidden>
+      <div id="ad-slot-a" class="ad-slot"></div>
+
+      <section class="card fortune-card">
+        <div class="fortune-scores">
+          <div class="fortune-score-item">
+            <span class="fortune-icon">💼</span>
+            <span class="fortune-score-label">직장운</span>
+            <div id="scoreWork" class="fortune-stars"></div>
+          </div>
+          <div class="fortune-score-item">
+            <span class="fortune-icon">💰</span>
+            <span class="fortune-score-label">금전운</span>
+            <div id="scoreMoney" class="fortune-stars"></div>
+          </div>
+          <div class="fortune-score-item">
+            <span class="fortune-icon">🤝</span>
+            <span class="fortune-score-label">대인관계</span>
+            <div id="scoreRelation" class="fortune-stars"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card fortune-detail-card">
+        <div class="fortune-section">
+          <h2 class="fortune-section-title">💼 직장운</h2>
+          <p id="fortuneWork" class="fortune-text"></p>
+        </div>
+      </section>
+
+      <div id="ad-slot-b" class="ad-slot"></div>
+
+      <section class="card fortune-detail-card">
+        <div class="fortune-section">
+          <h2 class="fortune-section-title">💰 금전운</h2>
+          <p id="fortuneMoney" class="fortune-text"></p>
+        </div>
+      </section>
+
+      <section class="card fortune-detail-card">
+        <div class="fortune-section">
+          <h2 class="fortune-section-title">🤝 대인관계운</h2>
+          <p id="fortuneRelation" class="fortune-text"></p>
+        </div>
+      </section>
+
+      <section class="card fortune-lucky-card">
+        <h2 class="section-title">오늘의 행운</h2>
+        <div class="lucky-grid">
+          <div class="lucky-item"><span class="lucky-label">행운의 숫자</span><span id="luckyNumber" class="lucky-val">—</span></div>
+          <div class="lucky-item"><span class="lucky-label">행운의 색깔</span><span id="luckyColor" class="lucky-val">—</span></div>
+          <div class="lucky-item"><span class="lucky-label">오늘의 키워드</span><span id="luckyWord" class="lucky-val">—</span></div>
+        </div>
+      </section>
+
+      <section class="card share-card">
+        <p class="share-desc">오늘의 운세를 친구들과 공유하세요</p>
+        <div class="share-btns">
+          <button id="btnShare" class="btn-share">📤 공유하기</button>
+          <button id="btnCopy" class="btn-copy">🔗 링크 복사</button>
+        </div>
+        <p id="copyMsg" class="copy-msg" hidden>링크가 복사됐습니다!</p>
+      </section>
+
+      <div id="ad-slot-c" class="ad-slot"></div>
+
+      <section class="card fortune-next-card">
+        <p class="fortune-next-msg">🌙 내일의 운세는 자정이 지나면 업데이트됩니다</p>
+        <p class="fortune-next-sub">매일 방문해서 오늘의 운을 확인해보세요!</p>
+      </section>
+
+      <section class="card related-card">
+        <h2 class="section-title">다른 계산기</h2>
+        <div class="related-grid">
+          <a href="/salary.html" class="related-item">💰 연봉 실수령액 계산기</a>
+          <a href="/percentile.html" class="related-item">📊 나는 연봉 상위 몇%?</a>
+          <a href="/severance.html" class="related-item">📋 퇴직금 계산기</a>
+          <a href="/quiz.html" class="related-item">🧠 세금 OX 퀴즈</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>본 운세는 재미로 즐기는 콘텐츠이며, 실제 운세와 무관합니다.</p>
+    <p>© 2026 연봉계산기 | <a href="/">홈으로</a></p>
+  </footer>
+
+  <script src="/js/fortune-data.js"></script>
+  <script src="/js/adsense.js"></script>
+  <script src="/js/share.js"></script>
+  <script>
+    function stars(score) {
+      return '⭐'.repeat(score) + '☆'.repeat(5 - score);
+    }
+
+    const fortune = getDailyFortune();
+    document.getElementById('fortuneDate').textContent = fortune.date + ' 직장인 운세';
+
+    document.getElementById('btnFortune').addEventListener('click', () => {
+      document.getElementById('scoreWork').textContent    = stars(fortune.score.work);
+      document.getElementById('scoreMoney').textContent   = stars(fortune.score.money);
+      document.getElementById('scoreRelation').textContent = stars(fortune.score.relation);
+      document.getElementById('fortuneWork').textContent   = fortune.work;
+      document.getElementById('fortuneMoney').textContent  = fortune.money;
+      document.getElementById('fortuneRelation').textContent = fortune.relation;
+      document.getElementById('luckyNumber').textContent  = fortune.lucky.number;
+      document.getElementById('luckyColor').textContent   = fortune.lucky.color;
+      document.getElementById('luckyWord').textContent    = fortune.lucky.word;
+
+      document.getElementById('fortune-content').hidden = false;
+      document.getElementById('btnFortune').textContent = '🔮 오늘의 운세 다시 보기';
+      document.getElementById('fortune-content').scrollIntoView({ behavior: 'smooth' });
+
+      insertAd('ad-slot-a');
+      insertAd('ad-slot-b');
+      insertAd('ad-slot-c');
+    });
+
+    document.getElementById('btnShare').addEventListener('click', () => {
+      shareCurrentPage('오늘의 직장인 운세', `${fortune.date} 직장운·금전운·대인관계운 확인하기`);
+    });
+    document.getElementById('btnCopy').addEventListener('click', () => {
+      copyToClipboard(location.href);
+      const msg = document.getElementById('copyMsg');
+      msg.hidden = false;
+      setTimeout(() => { msg.hidden = true; }, 2000);
+    });
+  </script>
+</body>
+</html>

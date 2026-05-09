@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>나는 연봉 상위 몇%? — 2026 한국 직장인 연봉 백분위 계산기</title>
+  <meta name="description" content="내 연봉이 한국 직장인 중 상위 몇 퍼센트인지 계산해보세요. 통계청 2023 임금구조기본조사 기준 연봉 백분위 계산기.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://junyoung9394.github.io/percentile.html">
+
+  <meta property="og:title" content="나는 연봉 상위 몇%? 한국 직장인 연봉 백분위">
+  <meta property="og:description" content="내 연봉이 한국 직장인 중 상위 몇%인지 바로 확인! 결과를 카카오톡으로 공유해보세요.">
+  <meta property="og:image" content="https://junyoung9394.github.io/icons/icon-512.png">
+  <meta property="og:url" content="https://junyoung9394.github.io/percentile.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ko_KR">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"연봉 백분위 계산기","description":"한국 직장인 연봉 백분위 계산기","url":"https://junyoung9394.github.io/percentile.html","applicationCategory":"FinanceApplication","inLanguage":"ko","isAccessibleForFree":true}
+  </script>
+
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/icons/icon-192.png">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="/" class="logo">💰 연봉계산기</a>
+    <nav class="site-nav">
+      <a href="/salary.html">실수령액</a>
+      <a href="/percentile.html" class="active">상위몇%</a>
+      <a href="/severance.html">퇴직금</a>
+      <a href="/minimum-wage.html">최저임금</a>
+      <a href="/fortune.html">운세</a>
+      <a href="/quiz.html">퀴즈</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>나는 연봉 상위 몇%?</h1>
+    <p class="subtitle">한국 직장인 중 내 연봉 순위를 확인하고 친구들과 비교해보세요</p>
+
+    <section class="card input-card">
+      <label class="input-label" for="pctInput">연봉 입력 <span id="pctDisplay" class="salary-display">4,000만원</span></label>
+      <input type="range" id="pctSlider" class="slider" min="10" max="300" step="10" value="40">
+      <div class="range-labels"><span>1,000만</span><span>3억</span></div>
+      <div class="number-input-row">
+        <input type="number" id="pctInput" class="num-input" min="1000000" max="300000000" step="1000000" value="40000000">
+        <span class="unit">원</span>
+      </div>
+      <div class="quick-btns">
+        <button class="qbtn" data-val="30000000">3,000만</button>
+        <button class="qbtn" data-val="40000000">4,000만</button>
+        <button class="qbtn" data-val="50000000">5,000만</button>
+        <button class="qbtn" data-val="60000000">6,000만</button>
+        <button class="qbtn" data-val="80000000">8,000만</button>
+        <button class="qbtn" data-val="100000000">1억</button>
+      </div>
+      <button id="btnCalcPct" class="btn-primary">백분위 계산하기</button>
+    </section>
+
+    <div id="ad-slot-a" class="ad-slot"></div>
+
+    <section id="pct-result" class="card result-card" hidden>
+      <div class="pct-badge-wrap">
+        <div class="pct-badge">
+          <span class="pct-label">상위</span>
+          <span id="pctValue" class="pct-number">—</span>
+          <span class="pct-label">%</span>
+        </div>
+      </div>
+      <p id="pctMsg" class="pct-msg"></p>
+      <div class="result-subs">
+        <div class="result-sub"><span class="result-sub-label">내 연봉</span><span id="myAnnual" class="result-sub-val"></span></div>
+        <div class="result-sub"><span class="result-sub-label">월 실수령액</span><span id="myNet" class="result-sub-val"></span></div>
+        <div class="result-sub"><span class="result-sub-label">중위 연봉 (50%)</span><span class="result-sub-val">약 4,200만원</span></div>
+      </div>
+    </section>
+
+    <div id="ad-slot-b" class="ad-slot"></div>
+
+    <section id="pct-distribution" class="card" hidden>
+      <h2 class="section-title">연봉 구간별 분포 <small>(통계청 2023 기준)</small></h2>
+      <div id="dist-bars" class="dist-bars"></div>
+      <p class="data-note">※ 출처: 통계청 2023년 임금구조기본조사 (전체 근로자 기준)</p>
+    </section>
+
+    <section id="share-result" class="card share-card" hidden>
+      <p class="share-desc">결과를 친구들과 비교해보세요!</p>
+      <div id="share-text-box" class="share-text-box"></div>
+      <div class="share-btns">
+        <button id="btnShare" class="btn-share">📤 공유하기</button>
+        <button id="btnCopy" class="btn-copy">🔗 링크 복사</button>
+      </div>
+      <p id="copyMsg" class="copy-msg" hidden>링크가 복사됐습니다!</p>
+    </section>
+
+    <div id="ad-slot-c" class="ad-slot"></div>
+
+    <section class="card related-card">
+      <h2 class="section-title">다른 계산기</h2>
+      <div class="related-grid">
+        <a href="/salary.html" class="related-item">💰 연봉 실수령액 계산기</a>
+        <a href="/severance.html" class="related-item">📋 퇴직금 계산기</a>
+        <a href="/minimum-wage.html" class="related-item">💵 최저임금 계산기</a>
+        <a href="/fortune.html" class="related-item">🔮 오늘의 직장인 운세</a>
+        <a href="/quiz.html" class="related-item">🧠 세금 OX 퀴즈</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>본 계산기는 통계청 자료 기반 추정값이며 실제 순위와 다를 수 있습니다.</p>
+    <p>© 2026 연봉계산기 | <a href="/">홈으로</a></p>
+  </footer>
+
+  <script src="/js/tax2026.js"></script>
+  <script src="/js/adsense.js"></script>
+  <script src="/js/share.js"></script>
+  <script>
+    // 통계청 2023 임금구조기본조사 백분위 (전체 근로자, 만원 단위)
+    const DIST = [
+      { pct: 10, amount: 1800,  label: '하위 10%' },
+      { pct: 20, amount: 2400,  label: '하위 20%' },
+      { pct: 30, amount: 2900,  label: '하위 30%' },
+      { pct: 40, amount: 3400,  label: '하위 40%' },
+      { pct: 50, amount: 4200,  label: '중위 (50%)' },
+      { pct: 60, amount: 5000,  label: '상위 40%' },
+      { pct: 70, amount: 6000,  label: '상위 30%' },
+      { pct: 80, amount: 7500,  label: '상위 20%' },
+      { pct: 90, amount: 10000, label: '상위 10%' },
+      { pct: 95, amount: 14000, label: '상위 5%' },
+      { pct: 99, amount: 24000, label: '상위 1%' },
+    ];
+
+    function getPercentile(annualWon) {
+      const mw = annualWon / 10000;
+      for (let i = DIST.length - 1; i >= 0; i--) {
+        if (mw >= DIST[i].amount) {
+          // 선형 보간
+          if (i === DIST.length - 1) return 1;
+          const lo = DIST[i], hi = DIST[i + 1];
+          const t = (mw - lo.amount) / (hi.amount - lo.amount);
+          const pct = lo.pct + t * (hi.pct - lo.pct);
+          return Math.max(1, Math.round(100 - pct));
+        }
+      }
+      return 95; // 하위 10% 미만
+    }
+
+    function getPctMessage(top) {
+      if (top <= 1)  return '🏆 전국 직장인 최상위 1%! 대단한 연봉입니다.';
+      if (top <= 5)  return '🥇 상위 5% 이내! 고연봉자 그룹에 속합니다.';
+      if (top <= 10) return '🥈 상위 10% 이내! 평균을 훨씬 웃도는 연봉이에요.';
+      if (top <= 20) return '🥉 상위 20% 이내! 평균보다 높은 연봉입니다.';
+      if (top <= 40) return '👍 상위 40% 이내! 중상위권 연봉입니다.';
+      if (top <= 50) return '😊 딱 중간 정도! 우리나라 평균 연봉 수준입니다.';
+      if (top <= 70) return '💪 절반보다는 낮지만, 연봉 성장의 여지가 있어요.';
+      return '🌱 성장 가능성이 무한합니다. 연봉 협상 타이밍을 노려보세요!';
+    }
+
+    function fmt(n) { return n.toLocaleString('ko-KR') + '원'; }
+    function fmtM(n) { return (n / 10000).toLocaleString('ko-KR', {maximumFractionDigits:0}) + '만원'; }
+
+    const slider = document.getElementById('pctSlider');
+    const numInput = document.getElementById('pctInput');
+    const display = document.getElementById('pctDisplay');
+
+    slider.addEventListener('input', () => {
+      const val = slider.value * 1_000_000;
+      numInput.value = val;
+      display.textContent = fmtM(val);
+    });
+    numInput.addEventListener('input', () => {
+      const val = Math.max(1_000_000, parseInt(numInput.value) || 40_000_000);
+      slider.value = Math.min(300, Math.round(val / 1_000_000));
+      display.textContent = fmtM(val);
+    });
+    document.querySelectorAll('.qbtn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const val = parseInt(btn.dataset.val);
+        numInput.value = val;
+        slider.value = Math.min(300, Math.round(val / 1_000_000));
+        display.textContent = fmtM(val);
+      });
+    });
+
+    document.getElementById('btnCalcPct').addEventListener('click', () => {
+      const annualWon = parseInt(numInput.value) || 40_000_000;
+      const top = getPercentile(annualWon);
+      const r = TAX.calculate(annualWon);
+
+      document.getElementById('pctValue').textContent = top;
+      document.getElementById('pctMsg').textContent = getPctMessage(top);
+      document.getElementById('myAnnual').textContent = fmtM(annualWon);
+      document.getElementById('myNet').textContent = fmt(r.netMonthly);
+
+      // Distribution bar chart
+      const maxAmount = DIST[DIST.length - 1].amount;
+      const myMw = annualWon / 10000;
+      document.getElementById('dist-bars').innerHTML = DIST.map(d => {
+        const isMe = myMw >= d.amount && (DIST.indexOf(d) === DIST.length - 1 || myMw < DIST[DIST.indexOf(d) + 1].amount);
+        return `<div class="dist-row${isMe ? ' dist-row-me' : ''}">
+          <span class="dist-label">${d.label}</span>
+          <div class="dist-bar-wrap">
+            <div class="dist-bar" style="width:${Math.round(d.amount / maxAmount * 100)}%"></div>
+          </div>
+          <span class="dist-val">${d.amount.toLocaleString()}만원</span>
+        </div>`;
+      }).join('');
+
+      // Share text
+      const shareText = `나는 한국 직장인 연봉 상위 ${top}%!\n내 연봉: ${fmtM(annualWon)} → 월 실수령액 ${fmt(r.netMonthly)}\n당신도 계산해보세요 👉 https://junyoung9394.github.io/percentile.html?salary=${Math.round(annualWon/10000)}`;
+      document.getElementById('share-text-box').textContent = shareText;
+
+      history.replaceState(null, '', `?salary=${Math.round(annualWon / 10000)}`);
+
+      // Show sections
+      ['pct-result', 'pct-distribution', 'share-result'].forEach(id => {
+        document.getElementById(id).hidden = false;
+      });
+      document.getElementById('pct-result').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Share buttons
+    document.getElementById('btnShare').addEventListener('click', () => {
+      const annualWon = parseInt(numInput.value) || 40_000_000;
+      const top = getPercentile(annualWon);
+      shareCurrentPage(`나는 연봉 상위 ${top}%`, '당신의 연봉 순위는?');
+    });
+    document.getElementById('btnCopy').addEventListener('click', () => {
+      copyToClipboard(location.href);
+      const msg = document.getElementById('copyMsg');
+      msg.hidden = false;
+      setTimeout(() => { msg.hidden = true; }, 2000);
+    });
+
+    // Init from URL param
+    const params = new URLSearchParams(location.search);
+    const initSal = parseInt(params.get('salary'));
+    if (initSal) {
+      const val = initSal * 10000;
+      numInput.value = val;
+      slider.value = Math.min(300, Math.round(val / 1_000_000));
+      display.textContent = fmtM(val);
+      document.getElementById('btnCalcPct').click();
+    }
+
+    window.addEventListener('load', () => {
+      insertAd('ad-slot-a');
+      insertAd('ad-slot-b');
+      insertAd('ad-slot-c');
+    });
+  </script>
+</body>
+</html>
