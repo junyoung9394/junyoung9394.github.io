@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="110" fill="#1a7f4b"/>
+  <g fill="none" stroke="#ffffff" stroke-width="36" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Top arrow -->
+    <polyline points="256,80 310,155 202,155 256,80"/>
+    <line x1="256" y1="155" x2="256" y2="200"/>
+    <!-- Bottom-left arrow -->
+    <polyline points="130,350 80,270 160,240 130,350"/>
+    <line x1="130" y1="310" x2="175" y2="355"/>
+    <!-- Bottom-right arrow -->
+    <polyline points="382,350 432,270 352,240 382,350"/>
+    <line x1="382" y1="310" x2="337" y2="355"/>
+    <!-- Triangle path -->
+    <path d="M202,155 Q90,165 80,270" stroke-width="28"/>
+    <path d="M310,155 Q422,165 432,270" stroke-width="28"/>
+    <path d="M175,355 Q215,405 256,405 Q297,405 337,355" stroke-width="28"/>
+  </g>
+</svg>

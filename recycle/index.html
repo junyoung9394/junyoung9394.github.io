@@ -5,9 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#1a7f4b">
   <title>분리수거 가이드 — 뭘 어디에 버릴까?</title>
-  <meta name="description" content="택배박스, 치킨박스, 배달용기, 아이스팩 등 헷갈리는 분리수거 방법을 빠르게 검색하세요.">
+  <meta name="description" content="치킨박스, 아이스팩, 배달용기, 빨대 등 헷갈리는 분리수거 방법을 바로 검색하세요. 환경부 기준 60개 이상 품목 수록.">
+  <link rel="canonical" href="https://junyoung9394.github.io/recycle/">
   <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="../icons/icon-192.png">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://junyoung9394.github.io/recycle/">
+  <meta property="og:title" content="분리수거 가이드 — 뭘 어디에 버릴까?">
+  <meta property="og:description" content="치킨박스, 아이스팩, 배달용기 등 헷갈리는 분리수거를 바로 검색하세요.">
+  <meta property="og:image" content="https://junyoung9394.github.io/recycle/og-image.png">
+  <meta name="twitter:card" content="summary">
+
   <link rel="stylesheet" href="styles.css">
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8518556382646891" crossorigin="anonymous"></script>
@@ -16,12 +26,15 @@
   <header class="topbar">
     <div class="logo">♻️ 분리수거 가이드</div>
     <div class="search-wrap">
-      <input id="searchInput" type="search" placeholder="예: 치킨박스, 아이스팩, 빨대…" autocomplete="off" autofocus>
+      <span class="search-icon" aria-hidden="true">🔍</span>
+      <input id="searchInput" type="search" placeholder="예: 치킨박스, 아이스팩, 빨대…" autocomplete="off" enterkeyhint="search">
       <button id="clearBtn" class="clear-btn" hidden aria-label="검색 지우기">✕</button>
     </div>
+    <button id="installBtn" class="install-btn" hidden aria-label="홈화면에 추가">📲 설치</button>
   </header>
 
-  <div class="ad-top">
+  <!-- 상단 배너 광고 -->
+  <div class="ad-banner">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-8518556382646891"
@@ -31,24 +44,45 @@
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
 
+  <!-- 자주 찾는 품목 -->
+  <section class="popular-section" id="popularSection">
+    <p class="popular-label">자주 찾는 품목</p>
+    <div class="popular-chips" id="popularChips"></div>
+  </section>
+
+  <!-- 최근 검색어 -->
+  <section class="recent-section" id="recentSection" hidden>
+    <div class="recent-header">
+      <p class="popular-label">최근 검색어</p>
+      <button id="clearRecentBtn" class="text-btn">전체 삭제</button>
+    </div>
+    <div class="popular-chips" id="recentChips"></div>
+  </section>
+
+  <!-- 카테고리 탭 -->
   <nav class="cats" id="catNav" role="tablist" aria-label="카테고리">
-    <button class="cat active" data-cat="전체" role="tab">전체</button>
-    <button class="cat" data-cat="종이류" role="tab">📦 종이</button>
-    <button class="cat" data-cat="플라스틱류" role="tab">🧴 플라스틱</button>
-    <button class="cat" data-cat="유리류" role="tab">🫙 유리</button>
-    <button class="cat" data-cat="금속류" role="tab">🥫 금속</button>
-    <button class="cat" data-cat="비닐류" role="tab">🛍️ 비닐</button>
-    <button class="cat" data-cat="스티로폼" role="tab">🍱 스티로폼</button>
-    <button class="cat" data-cat="음식물" role="tab">🍂 음식물</button>
-    <button class="cat" data-cat="일반쓰레기" role="tab">🗑️ 일반</button>
-    <button class="cat" data-cat="특수수거" role="tab">🔋 특수</button>
+    <button class="cat active" data-cat="전체" role="tab" aria-selected="true">전체</button>
+    <button class="cat" data-cat="종이류" role="tab" aria-selected="false">📦 종이</button>
+    <button class="cat" data-cat="플라스틱류" role="tab" aria-selected="false">🧴 플라스틱</button>
+    <button class="cat" data-cat="유리류" role="tab" aria-selected="false">🫙 유리</button>
+    <button class="cat" data-cat="금속류" role="tab" aria-selected="false">🥫 금속</button>
+    <button class="cat" data-cat="비닐류" role="tab" aria-selected="false">🛍️ 비닐</button>
+    <button class="cat" data-cat="스티로폼" role="tab" aria-selected="false">🍱 스티로폼</button>
+    <button class="cat" data-cat="음식물" role="tab" aria-selected="false">🍂 음식물</button>
+    <button class="cat" data-cat="일반쓰레기" role="tab" aria-selected="false">🗑️ 일반</button>
+    <button class="cat" data-cat="특수수거" role="tab" aria-selected="false">🔋 특수</button>
   </nav>
 
   <main class="container">
-    <p id="emptyMsg" class="empty" hidden>검색 결과가 없어요. 다른 키워드로 찾아보세요.</p>
-    <div id="itemGrid" class="grid"></div>
+    <div id="resultCount" class="result-count" hidden></div>
+    <p id="emptyMsg" class="empty" hidden>
+      검색 결과가 없어요 😅<br>
+      <span class="muted">다른 키워드로 찾아보거나 카테고리를 눌러보세요</span>
+    </p>
+    <div id="itemGrid" class="grid" role="list"></div>
 
-    <div class="ad-mid">
+    <!-- 중간 광고 -->
+    <div class="ad-banner ad-mid">
       <ins class="adsbygoogle"
            style="display:block"
            data-ad-client="ca-pub-8518556382646891"
@@ -59,14 +93,17 @@
     </div>
   </main>
 
-  <!-- Item Detail Modal -->
-  <dialog id="detailModal" class="modal">
+  <!-- 아이템 상세 모달 -->
+  <dialog id="detailModal" class="modal" aria-modal="true">
     <button class="modal-close" id="modalClose" aria-label="닫기">✕</button>
-    <div id="modalContent"></div>
+    <div id="modalContent" tabindex="-1"></div>
+    <div class="modal-footer">
+      <button id="shareBtn" class="modal-action-btn">🔗 공유하기</button>
+    </div>
   </dialog>
 
   <footer class="footer">
-    <div class="ad-footer">
+    <div class="ad-banner">
       <ins class="adsbygoogle"
            style="display:block"
            data-ad-client="ca-pub-8518556382646891"
@@ -75,7 +112,8 @@
            data-full-width-responsive="true"></ins>
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <small>지역마다 규정이 다를 수 있습니다 • 환경부·지자체 기준 참고</small>
+    <p class="footer-note">지역마다 규정이 다를 수 있어요 • 환경부·지자체 기준 참고</p>
+    <a href="privacy.html" class="footer-link">개인정보처리방침</a>
   </footer>
 
   <script src="app.js"></script>
