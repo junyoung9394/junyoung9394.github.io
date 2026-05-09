@@ -1,0 +1,30 @@
+{
+  "packageId": "com.junyoung9394.lafc",
+  "host": "junyoung9394.github.io",
+  "name": "LAFC 손흥민 — 엄마 전용",
+  "launcherName": "LAFC 엄마",
+  "display": "standalone",
+  "orientation": "portrait",
+  "themeColor": "#0b1020",
+  "backgroundColor": "#0b1020",
+  "startUrl": "/",
+  "iconUrl": "https://junyoung9394.github.io/icons/icon-512.png",
+  "maskableIconUrl": "https://junyoung9394.github.io/icons/icon-512.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "./android.keystore",
+    "alias": "lafc"
+  },
+  "appVersionCode": 1,
+  "appVersionName": "1.0.0",
+  "enableNotifications": false,
+  "shortcuts": [],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://junyoung9394.github.io/manifest.json",
+  "admob": {
+    "appId": "REPLACE_WITH_ADMOB_APP_ID",
+    "bannerAdUnitId": "REPLACE_WITH_ADMOB_BANNER_UNIT_ID",
+    "interstitialAdUnitId": "REPLACE_WITH_ADMOB_INTERSTITIAL_UNIT_ID"
+  },
+  "additionalTrustedOrigins": []
+}
