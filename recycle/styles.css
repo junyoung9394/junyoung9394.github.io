@@ -1,0 +1,139 @@
+:root {
+  --bg: #f0faf4;
+  --card: #ffffff;
+  --text: #1a2e1f;
+  --muted: #5a7a62;
+  --acc: #1a7f4b;
+  --acc2: #25a863;
+  --border: #c8e6d4;
+  --shadow: 0 2px 12px #0001;
+  --base: 16px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: var(--base); }
+body { background: var(--bg); color: var(--text); font-family: Apple SD Gothic Neo, system-ui, -apple-system, Segoe UI, Noto Sans KR, Arial, sans-serif; }
+
+/* Header */
+.topbar {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--acc); padding: 12px 16px 10px;
+  display: flex; flex-direction: column; gap: 10px;
+  box-shadow: 0 2px 8px #0003;
+}
+.logo { color: #fff; font-size: 1.15rem; font-weight: 800; letter-spacing: -.3px; }
+.search-wrap { position: relative; }
+#searchInput {
+  width: 100%; padding: 12px 40px 12px 16px;
+  border: none; border-radius: 12px;
+  font-size: 1rem; background: #fff;
+  color: var(--text); outline: none;
+  box-shadow: 0 1px 4px #0002;
+}
+#searchInput::placeholder { color: #9ab8a4; }
+.clear-btn {
+  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; color: #9ab8a4; font-size: 1rem;
+  cursor: pointer; padding: 4px; line-height: 1;
+}
+
+/* Ad top */
+.ad-top { background: #fff; padding: 4px 0; min-height: 50px; }
+
+/* Category nav */
+.cats {
+  display: flex; gap: 8px; padding: 12px 16px;
+  overflow-x: auto; scrollbar-width: none; background: #fff;
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 92px; z-index: 10;
+}
+.cats::-webkit-scrollbar { display: none; }
+.cat {
+  flex-shrink: 0; padding: 8px 14px; border-radius: 999px;
+  border: 2px solid var(--border); background: #fff;
+  color: var(--muted); font-size: .9rem; cursor: pointer; white-space: nowrap;
+  transition: all .15s;
+}
+.cat.active, .cat:hover {
+  background: var(--acc); border-color: var(--acc); color: #fff;
+}
+
+/* Grid */
+.container { padding: 16px; max-width: 960px; margin: 0 auto; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+
+.item-card {
+  background: var(--card); border: 1.5px solid var(--border); border-radius: 16px;
+  padding: 16px 12px; cursor: pointer; text-align: center;
+  box-shadow: var(--shadow); transition: transform .12s, box-shadow .12s;
+  display: flex; flex-direction: column; gap: 8px; align-items: center;
+}
+.item-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px #0002; }
+.item-card:active { transform: scale(.97); }
+.item-emoji { font-size: 2rem; line-height: 1; }
+.item-name { font-size: .95rem; font-weight: 700; }
+.item-badge {
+  font-size: .75rem; padding: 3px 10px; border-radius: 999px;
+  font-weight: 600; display: inline-block;
+}
+.item-where { font-size: .82rem; color: var(--muted); line-height: 1.3; }
+
+/* Category badge colors */
+.badge-종이류     { background: #fef3c7; color: #92400e; }
+.badge-플라스틱류  { background: #dbeafe; color: #1e40af; }
+.badge-유리류     { background: #d1fae5; color: #065f46; }
+.badge-금속류     { background: #e5e7eb; color: #374151; }
+.badge-비닐류     { background: #ede9fe; color: #4c1d95; }
+.badge-스티로폼   { background: #fff1f2; color: #881337; }
+.badge-음식물    { background: #ecfccb; color: #365314; }
+.badge-일반쓰레기  { background: #f3f4f6; color: #6b7280; }
+.badge-특수수거   { background: #fce7f3; color: #831843; }
+
+/* Empty state */
+.empty { text-align: center; padding: 48px 16px; color: var(--muted); font-size: 1.05rem; }
+
+/* Modal */
+.modal {
+  border: none; border-radius: 20px; padding: 0; width: min(94vw, 480px);
+  box-shadow: 0 8px 40px #0004; background: var(--card);
+  max-height: 90vh; overflow-y: auto;
+}
+.modal::backdrop { background: #0007; }
+.modal-close {
+  position: sticky; top: 0; float: right; z-index: 10;
+  background: #f3f4f6; border: none; border-radius: 999px;
+  width: 32px; height: 32px; font-size: .9rem;
+  cursor: pointer; margin: 12px 12px 0 0; display: block;
+}
+#modalContent { padding: 16px 20px 24px; clear: both; }
+.modal-emoji { font-size: 3rem; display: block; text-align: center; margin-bottom: 8px; }
+.modal-name { font-size: 1.4rem; font-weight: 800; text-align: center; margin-bottom: 6px; }
+.modal-badge { display: flex; justify-content: center; margin-bottom: 16px; }
+.modal-section { margin-top: 16px; }
+.modal-section h3 { font-size: .85rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 8px; }
+.modal-where { font-size: 1.1rem; font-weight: 700; color: var(--acc); background: #f0faf4; border-radius: 10px; padding: 10px 14px; }
+.modal-how { font-size: .95rem; line-height: 1.7; }
+.modal-steps { list-style: none; counter-reset: step; }
+.modal-steps li { counter-increment: step; padding: 6px 0 6px 28px; position: relative; font-size: .95rem; line-height: 1.5; border-bottom: 1px solid var(--border); }
+.modal-steps li:last-child { border-bottom: none; }
+.modal-steps li::before { content: counter(step); position: absolute; left: 0; top: 7px; background: var(--acc); color: #fff; border-radius: 50%; width: 20px; height: 20px; font-size: .75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.modal-tips { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.modal-tips li { background: #fffbeb; border-radius: 10px; padding: 8px 12px; font-size: .88rem; line-height: 1.5; }
+.modal-tips li::before { content: "💡 "; }
+.modal-exc { background: #fff1f2; border-radius: 10px; padding: 10px 14px; font-size: .88rem; line-height: 1.5; color: #9f1239; }
+.modal-exc::before { content: "⚠️ "; }
+
+/* Ad units */
+.ad-mid { margin: 24px 0; min-height: 90px; }
+.ad-footer { max-width: 960px; margin: 0 auto; padding: 12px 16px 4px; }
+.footer { text-align: center; padding-bottom: 16px; color: var(--muted); font-size: .82rem; }
+
+@media (max-width: 480px) {
+  .grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+  .cats { top: 98px; }
+}
+@media (min-width: 640px) {
+  .topbar { flex-direction: row; align-items: center; }
+  .logo { flex-shrink: 0; }
+  .search-wrap { flex: 1; max-width: 480px; }
+  .cats { top: 56px; }
+}

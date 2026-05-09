@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1a7f4b">
+  <title>분리수거 가이드 — 뭘 어디에 버릴까?</title>
+  <meta name="description" content="택배박스, 치킨박스, 배달용기, 아이스팩 등 헷갈리는 분리수거 방법을 빠르게 검색하세요.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="../icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8518556382646891" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">♻️ 분리수거 가이드</div>
+    <div class="search-wrap">
+      <input id="searchInput" type="search" placeholder="예: 치킨박스, 아이스팩, 빨대…" autocomplete="off" autofocus>
+      <button id="clearBtn" class="clear-btn" hidden aria-label="검색 지우기">✕</button>
+    </div>
+  </header>
+
+  <div class="ad-top">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-8518556382646891"
+         data-ad-slot="TOP_SLOT_ID"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <nav class="cats" id="catNav" role="tablist" aria-label="카테고리">
+    <button class="cat active" data-cat="전체" role="tab">전체</button>
+    <button class="cat" data-cat="종이류" role="tab">📦 종이</button>
+    <button class="cat" data-cat="플라스틱류" role="tab">🧴 플라스틱</button>
+    <button class="cat" data-cat="유리류" role="tab">🫙 유리</button>
+    <button class="cat" data-cat="금속류" role="tab">🥫 금속</button>
+    <button class="cat" data-cat="비닐류" role="tab">🛍️ 비닐</button>
+    <button class="cat" data-cat="스티로폼" role="tab">🍱 스티로폼</button>
+    <button class="cat" data-cat="음식물" role="tab">🍂 음식물</button>
+    <button class="cat" data-cat="일반쓰레기" role="tab">🗑️ 일반</button>
+    <button class="cat" data-cat="특수수거" role="tab">🔋 특수</button>
+  </nav>
+
+  <main class="container">
+    <p id="emptyMsg" class="empty" hidden>검색 결과가 없어요. 다른 키워드로 찾아보세요.</p>
+    <div id="itemGrid" class="grid"></div>
+
+    <div class="ad-mid">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-8518556382646891"
+           data-ad-slot="MID_SLOT_ID"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </main>
+
+  <!-- Item Detail Modal -->
+  <dialog id="detailModal" class="modal">
+    <button class="modal-close" id="modalClose" aria-label="닫기">✕</button>
+    <div id="modalContent"></div>
+  </dialog>
+
+  <footer class="footer">
+    <div class="ad-footer">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-8518556382646891"
+           data-ad-slot="FOOTER_SLOT_ID"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    <small>지역마다 규정이 다를 수 있습니다 • 환경부·지자체 기준 참고</small>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
