@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026 최저임금 계산기 — 시급 월급 연봉 주휴수당 자동 계산</title>
+  <meta name="description" content="2026년 최저임금 시급으로 월급·연봉·주휴수당을 자동 계산합니다. 아르바이트, 단기 근무자를 위한 최저임금 계산기.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://junyoung9394.github.io/minimum-wage.html">
+  <meta property="og:title" content="2026 최저임금 계산기">
+  <meta property="og:description" content="2026 최저임금 시급으로 월급·연봉·주휴수당 자동 계산">
+  <meta property="og:image" content="https://junyoung9394.github.io/icons/icon-512.png">
+  <meta property="og:url" content="https://junyoung9394.github.io/minimum-wage.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ko_KR">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"2026 최저임금 계산기","url":"https://junyoung9394.github.io/minimum-wage.html","applicationCategory":"FinanceApplication","inLanguage":"ko","isAccessibleForFree":true}
+  </script>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/icons/icon-192.png">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="/" class="logo">💰 연봉계산기</a>
+    <nav class="site-nav">
+      <a href="/salary.html">실수령액</a>
+      <a href="/percentile.html">상위몇%</a>
+      <a href="/severance.html">퇴직금</a>
+      <a href="/minimum-wage.html" class="active">최저임금</a>
+      <a href="/fortune.html">운세</a>
+      <a href="/quiz.html">퀴즈</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>2026 최저임금 계산기</h1>
+    <p class="subtitle">주 근무시간을 입력하면 시급·월급·연봉·주휴수당을 자동 계산합니다</p>
+
+    <section class="card mw-badge-card">
+      <div class="mw-badge">
+        <span class="mw-badge-label">2026 최저시급</span>
+        <span id="minWageDisplay" class="mw-badge-amount">—</span>
+        <span class="mw-badge-label">원 / 시간</span>
+      </div>
+      <p class="mw-note" id="mwNote"></p>
+    </section>
+
+    <section class="card input-card">
+      <label class="input-label">주 근무시간 <span id="hoursDisplay" class="salary-display">40시간</span></label>
+      <input type="range" id="hoursSlider" class="slider" min="1" max="52" step="1" value="40">
+      <div class="range-labels"><span>1시간</span><span>52시간</span></div>
+      <div class="quick-btns">
+        <button class="qbtn" data-hours="10">주 10h<br><small>알바 단시간</small></button>
+        <button class="qbtn" data-hours="20">주 20h<br><small>파트타임</small></button>
+        <button class="qbtn" data-hours="40">주 40h<br><small>정규직 기준</small></button>
+        <button class="qbtn" data-hours="52">주 52h<br><small>최대 법정</small></button>
+      </div>
+    </section>
+
+    <div id="ad-slot-a" class="ad-slot"></div>
+
+    <section class="card result-card">
+      <div class="result-headline">
+        <span class="result-label">예상 월급</span>
+        <span id="mwMonthly" class="result-amount">—</span>
+      </div>
+      <div class="result-subs">
+        <div class="result-sub"><span class="result-sub-label">시급</span><span id="mwHourly" class="result-sub-val">—</span></div>
+        <div class="result-sub"><span class="result-sub-label">주휴수당 포함 월급</span><span id="mwMonthlyWithHoliday" class="result-sub-val">—</span></div>
+        <div class="result-sub"><span class="result-sub-label">연봉 (12개월)</span><span id="mwAnnual" class="result-sub-val">—</span></div>
+      </div>
+    </section>
+
+    <div id="ad-slot-b" class="ad-slot"></div>
+
+    <section class="card detail-card">
+      <h2 class="section-title">계산 내역</h2>
+      <table class="detail-table">
+        <thead><tr><th>항목</th><th>금액</th><th>비고</th></tr></thead>
+        <tbody id="mw-detail-body"></tbody>
+      </table>
+    </section>
+
+    <section class="card info-card">
+      <h2 class="section-title">최저임금 알아두기</h2>
+      <div class="info-list">
+        <div class="info-item"><span class="info-icon">📌</span><div><strong>주휴수당:</strong> 주 15시간 이상 개근 시 1일분 추가 지급 (주 40시간 기준 8시간분)</div></div>
+        <div class="info-item"><span class="info-icon">📌</span><div><strong>적용 대상:</strong> 모든 근로자 (정규직·비정규직·아르바이트 동일 적용)</div></div>
+        <div class="info-item"><span class="info-icon">📌</span><div><strong>수습 기간:</strong> 수습 3개월 이내 감액 가능 (단순 노무는 감액 불가)</div></div>
+        <div class="info-item"><span class="info-icon">⚠️</span><div><strong>신고:</strong> 최저임금 미지급 시 고용노동부 고객상담센터 (1350)에 신고 가능</div></div>
+      </div>
+    </section>
+
+    <div id="ad-slot-c" class="ad-slot"></div>
+
+    <section class="card related-card">
+      <h2 class="section-title">다른 계산기</h2>
+      <div class="related-grid">
+        <a href="/salary.html" class="related-item">💰 연봉 실수령액 계산기</a>
+        <a href="/percentile.html" class="related-item">📊 나는 연봉 상위 몇%?</a>
+        <a href="/severance.html" class="related-item">📋 퇴직금 계산기</a>
+        <a href="/fortune.html" class="related-item">🔮 오늘의 직장인 운세</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>※ 2026년 최저임금은 2025년 고용노동부 고시 기준입니다. 변경 시 업데이트됩니다.</p>
+    <p>© 2026 연봉계산기 | <a href="/">홈으로</a></p>
+  </footer>
+
+  <script src="/js/tax2026.js"></script>
+  <script src="/js/adsense.js"></script>
+  <script src="/js/share.js"></script>
+  <script>
+    const mw = TAX.MINIMUM_WAGE_2026;
+    document.getElementById('minWageDisplay').textContent = mw.toLocaleString('ko-KR');
+    document.getElementById('mwNote').textContent = `2025년 확정 기준 (${mw.toLocaleString()}원/시간) — 전년 대비 인상률 확인 중`;
+
+    function fmt(n) { return n.toLocaleString('ko-KR') + '원'; }
+
+    const slider = document.getElementById('hoursSlider');
+    const display = document.getElementById('hoursDisplay');
+
+    function render(hours) {
+      display.textContent = `${hours}시간`;
+      const r = TAX.calcMinimumWage(hours);
+      const dailyHours = hours / 5;
+      const weeklyHolidayHours = hours >= 15 ? dailyHours : 0;
+      const weeklyHolidayPay = Math.round(mw * weeklyHolidayHours);
+      const monthlyBase = Math.round(mw * hours * (52 / 12));
+      const monthlyHoliday = Math.round(weeklyHolidayPay * (52 / 12));
+
+      document.getElementById('mwHourly').textContent = fmt(mw);
+      document.getElementById('mwMonthly').textContent = fmt(monthlyBase);
+      document.getElementById('mwMonthlyWithHoliday').textContent = fmt(monthlyBase + monthlyHoliday);
+      document.getElementById('mwAnnual').textContent = fmt((monthlyBase + monthlyHoliday) * 12);
+
+      document.getElementById('mw-detail-body').innerHTML = [
+        ['시급', fmt(mw), '2026 최저임금'],
+        ['주 근무시간', `${hours}시간`, ''],
+        ['주급 (기본)', fmt(mw * hours), `${mw.toLocaleString()} × ${hours}h`],
+        ['주휴수당', hours >= 15 ? fmt(weeklyHolidayPay) : '해당없음', hours >= 15 ? `주 15시간 이상 개근 시` : '주 15시간 미만'],
+        ['월급 (기본)', fmt(monthlyBase), '주 × 52 ÷ 12'],
+        ['월급 (주휴 포함)', fmt(monthlyBase + monthlyHoliday), ''],
+        ['연봉 (주휴 포함)', fmt((monthlyBase + monthlyHoliday) * 12), '12개월 기준'],
+      ].map(([label, val, note]) =>
+        `<tr><td>${label}</td><td>${val}</td><td class="note">${note}</td></tr>`
+      ).join('');
+    }
+
+    slider.addEventListener('input', () => render(parseInt(slider.value)));
+    document.querySelectorAll('.qbtn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const h = parseInt(btn.dataset.hours);
+        slider.value = h;
+        render(h);
+      });
+    });
+
+    render(40);
+
+    window.addEventListener('load', () => {
+      insertAd('ad-slot-a');
+      insertAd('ad-slot-b');
+      insertAd('ad-slot-c');
+    });
+  </script>
+</body>
+</html>

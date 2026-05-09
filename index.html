@@ -1,94 +1,131 @@
-
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, nofollow">
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#0b1020">
-  <title>LAFC 손흥민 — 엄마 전용 (자동 최신화)</title>
-  <link rel="stylesheet" href="styles.css">
-  <meta name="description" content="LAFC 경기 일정 · 라인업 · 선수단 (KST/LA 표기, 한글 팀명, 자동 최신화/무료 API)">
-  <link rel="icon" href="icons/icon-192.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>연봉 계산기 허브 — 2026 실수령액·퇴직금·최저임금·운세</title>
+  <meta name="description" content="2026년 연봉 실수령액 계산기, 퇴직금 계산기, 최저임금 계산기, 연봉 백분위, 직장인 운세까지. 직장인을 위한 모든 계산기가 한 곳에!">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://junyoung9394.github.io/">
+
+  <meta property="og:title" content="2026 연봉 계산기 허브 — 실수령액·퇴직금·최저임금">
+  <meta property="og:description" content="직장인을 위한 모든 계산기가 한 곳에! 연봉 실수령액, 퇴직금, 최저임금, 연봉 순위까지.">
+  <meta property="og:image" content="https://junyoung9394.github.io/icons/icon-512.png">
+  <meta property="og:url" content="https://junyoung9394.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ko_KR">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebSite","name":"연봉 계산기 허브","url":"https://junyoung9394.github.io/","description":"2026 연봉 실수령액, 퇴직금, 최저임금, 연봉 백분위 계산기","inLanguage":"ko"}
+  </script>
+
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/icons/icon-192.png">
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <header class="topbar">
-    <h1>⚽ LAFC 손흥민 — 엄마 전용</h1>
-    <div class="top-actions">
-      <button id="refreshBtn" class="btn small">새로고침</button>
-      <button id="installBtn" class="btn small" hidden>홈화면 설치</button>
-      <button id="fontBtn" class="btn small" aria-pressed="false">글씨 크게</button>
-      <button id="settingsBtn" class="btn small">설정</button>
-    </div>
+  <header class="site-header">
+    <a href="/" class="logo">💰 연봉계산기</a>
+    <nav class="site-nav">
+      <a href="/salary.html">실수령액</a>
+      <a href="/percentile.html">상위몇%</a>
+      <a href="/severance.html">퇴직금</a>
+      <a href="/minimum-wage.html">최저임금</a>
+      <a href="/fortune.html">운세</a>
+      <a href="/quiz.html">퀴즈</a>
+    </nav>
   </header>
 
   <main class="container">
-    <div id="updatedAt" class="muted" style="text-align:right"></div>
+    <section class="hero-section">
+      <h1 class="hero-title">직장인을 위한<br>모든 계산기</h1>
+      <p class="hero-sub">2026년 최신 기준 · 무료 · 빠른 계산</p>
+    </section>
 
-    <nav class="tabs" role="tablist" aria-label="섹션">
-      <button class="tab active" data-tab="tab-schedule" role="tab" aria-selected="true">일정/결과</button>
-      <button class="tab" data-tab="tab-lineup" role="tab" aria-selected="false">라인업</button>
-      <button class="tab" data-tab="tab-squad" role="tab" aria-selected="false">선수단</button>
-    </nav>
+    <div id="ad-slot-hero" class="ad-slot"></div>
 
-    <section id="tab-schedule" class="card tabpanel" role="tabpanel">
-      <h2>오늘 & 다음 경기</h2>
-      <div id="nextMatch" class="match-card"></div>
-      <div class="actions">
-        <a id="btnMatchCenter" class="btn" target="_blank" rel="noopener">매치 센터</a>
-        <a id="btnSeasonPass" class="btn" target="_blank" rel="noopener">Apple TV(MLS Pass)</a>
-        <a id="btnYT" class="btn" target="_blank" rel="noopener">유튜브 하이라이트</a>
-        <button id="btnICS" class="btn outline">이 경기 캘린더</button>
-        <button id="btnICSAll" class="btn outline">전체 일정 iCal</button>
-        <button id="btnPrint" class="btn outline">인쇄용 보기</button>
+    <section class="tools-grid">
+      <a href="/salary.html" class="tool-card tool-primary">
+        <span class="tool-icon">💰</span>
+        <div class="tool-info">
+          <h2 class="tool-title">연봉 실수령액 계산기</h2>
+          <p class="tool-desc">소득세·4대보험 공제 후<br>월 실수령액 바로 확인</p>
+          <span class="tool-badge">가장 많이 사용</span>
+        </div>
+      </a>
+
+      <a href="/percentile.html" class="tool-card tool-viral">
+        <span class="tool-icon">📊</span>
+        <div class="tool-info">
+          <h2 class="tool-title">나는 연봉 상위 몇%?</h2>
+          <p class="tool-desc">한국 직장인 중 내 연봉<br>순위를 확인하고 공유하기</p>
+          <span class="tool-badge tool-badge-hot">🔥 인기</span>
+        </div>
+      </a>
+
+      <a href="/severance.html" class="tool-card">
+        <span class="tool-icon">📋</span>
+        <div class="tool-info">
+          <h2 class="tool-title">퇴직금 계산기</h2>
+          <p class="tool-desc">재직기간과 평균임금으로<br>퇴직금 자동 계산</p>
+        </div>
+      </a>
+
+      <a href="/minimum-wage.html" class="tool-card">
+        <span class="tool-icon">💵</span>
+        <div class="tool-info">
+          <h2 class="tool-title">최저임금 계산기</h2>
+          <p class="tool-desc">2026년 최저시급 기준<br>월급·연봉·주휴수당 계산</p>
+        </div>
+      </a>
+
+      <a href="/fortune.html" class="tool-card tool-fortune">
+        <span class="tool-icon">🔮</span>
+        <div class="tool-info">
+          <h2 class="tool-title">오늘의 직장인 운세</h2>
+          <p class="tool-desc">직장운·금전운·대인관계운<br>매일 새롭게 업데이트</p>
+          <span class="tool-badge tool-badge-daily">매일 업데이트</span>
+        </div>
+      </a>
+
+      <a href="/quiz.html" class="tool-card tool-quiz">
+        <span class="tool-icon">🧠</span>
+        <div class="tool-info">
+          <h2 class="tool-title">세금 OX 퀴즈</h2>
+          <p class="tool-desc">연봉·세금·노동법 상식<br>5문제 도전 + 스트릭</p>
+          <span class="tool-badge tool-badge-daily">매일 5문제</span>
+        </div>
+      </a>
+    </section>
+
+    <div id="ad-slot-mid" class="ad-slot"></div>
+
+    <section class="card info-banner">
+      <h2 class="section-title">왜 연봉 계산기를 써야 할까요?</h2>
+      <div class="info-list">
+        <div class="info-item"><span class="info-icon">✅</span><div>연봉 협상 전 <strong>실제 세후 월급</strong>을 미리 확인하세요</div></div>
+        <div class="info-item"><span class="info-icon">✅</span><div>이직 시 <strong>연봉 인상률이 실수령액에 얼마나 영향</strong>을 미치는지 계산하세요</div></div>
+        <div class="info-item"><span class="info-icon">✅</span><div><strong>퇴직 예정</strong>이라면 퇴직금 계산으로 미리 준비하세요</div></div>
+        <div class="info-item"><span class="info-icon">✅</span><div>아르바이트·단기 근무 시 <strong>최저임금 미지급 여부</strong>를 확인하세요</div></div>
       </div>
-      <div class="filters">
-        <label class="chk"><input type="checkbox" id="onlyHome"> 홈 경기만</label>
-        <label class="chk"><input type="checkbox" id="onlySon"> 손흥민 출전 예정만</label>
-      </div>
-      <ul id="schedule" class="schedule" aria-live="polite"></ul>
     </section>
 
-    <section id="tab-lineup" class="card tabpanel" role="tabpanel" hidden>
-      <h2>최근 경기 라인업</h2>
-      <div id="lineupList" class="lineups"></div>
-      <p class="muted">※ 무료 플랜에서는 라인업도 캐시 주기로 동기화됩니다.</p>
-    </section>
-
-    <section id="tab-squad" class="card tabpanel" role="tabpanel" hidden>
-      <h2>선수단</h2>
-      <div id="squad" class="squad"></div>
-    </section>
-
-    <section class="card">
-      <h2>시청 안내</h2>
-      <ul class="bullets">
-        <li><b>공식 플랫폼만</b> 연결돼요: Apple TV(MLS Season Pass), LAFC/MLS 유튜브.</li>
-        <li>불법 스트리밍 링크는 제공하지 않아요.</li>
-      </ul>
-    </section>
+    <div id="ad-slot-bottom" class="ad-slot"></div>
   </main>
 
-  <footer class="footer">
-    <small>ⓒ 엄마 전용 팬 페이지 • 자동 최신화(무료 플랜)</small>
+  <footer class="site-footer">
+    <p>본 사이트의 계산 결과는 참고용이며 실제 세금과 다를 수 있습니다.</p>
+    <p>© 2026 연봉계산기 | 모든 계산기는 무료입니다</p>
   </footer>
 
-  <!-- Settings Modal -->
-  <dialog id="settings">
-    <form method="dialog" class="settings">
-      <h3>설정</h3>
-      <label>API 주소(워커 URL)
-        <input id="apiBaseInput" placeholder="https://xxxx.workers.dev">
-      </label>
-      <div class="muted">여기에 붙여넣으면 저장돼요. 다음 접속부터 자동 사용.</div>
-      <div class="row">
-        <button id="saveSettings" class="btn">저장</button>
-        <button class="btn outline" value="cancel">닫기</button>
-      </div>
-    </form>
-  </dialog>
-
-  <script src="app.js"></script>
+  <script src="/js/adsense.js"></script>
+  <script>
+    window.addEventListener('load', () => {
+      insertAd('ad-slot-hero');
+      insertAd('ad-slot-mid');
+      insertAd('ad-slot-bottom');
+    });
+  </script>
 </body>
 </html>
