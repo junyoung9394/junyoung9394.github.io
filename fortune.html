@@ -39,8 +39,6 @@
     </section>
 
     <div id="fortune-content" hidden>
-      <div id="ad-slot-a" class="ad-slot"></div>
-
       <section class="card fortune-card">
         <div class="fortune-scores">
           <div class="fortune-score-item">
@@ -67,8 +65,6 @@
           <p id="fortuneWork" class="fortune-text"></p>
         </div>
       </section>
-
-      <div id="ad-slot-b" class="ad-slot"></div>
 
       <section class="card fortune-detail-card">
         <div class="fortune-section">
@@ -152,8 +148,6 @@
       document.getElementById('btnFortune').textContent = '🔮 오늘의 운세 다시 보기';
       document.getElementById('fortune-content').scrollIntoView({ behavior: 'smooth' });
 
-      insertAd('ad-slot-a');
-      insertAd('ad-slot-b');
       insertAd('ad-slot-c');
     });
 

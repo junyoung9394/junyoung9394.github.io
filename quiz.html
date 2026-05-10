@@ -43,8 +43,6 @@
       <p id="streakMsg" class="streak-msg"></p>
     </section>
 
-    <div id="ad-slot-top" class="ad-slot"></div>
-
     <div id="quiz-area">
       <section id="quiz-intro" class="card quiz-intro-card">
         <p class="quiz-intro-text">직장인이라면 꼭 알아야 할 세금·노동법 상식을 테스트해보세요.<br>오늘의 5문제에 도전!</p>
@@ -68,8 +66,6 @@
         <p id="answerExplain" class="answer-explain"></p>
         <button id="btnNextQ" class="btn-primary">다음 문제</button>
       </section>
-
-      <div id="ad-slot-mid" class="ad-slot"></div>
 
       <section id="quiz-result" class="card result-card" hidden>
         <div class="result-headline">
@@ -186,7 +182,6 @@
       document.getElementById('answerExplain').textContent = q.e;
       document.getElementById('quiz-answer').hidden = false;
 
-      insertAd('ad-slot-mid');
     }
 
     function nextQuestion() {
@@ -229,7 +224,7 @@
       shareCurrentPage(`직장인 세금 퀴즈 ${score}/5점 달성!`, '당신도 세금 상식 퀴즈에 도전해보세요');
     });
 
-    window.addEventListener('load', () => insertAd('ad-slot-top'));
+    window.addEventListener('load', () => insertAd('ad-slot-bottom'));
   </script>
 </body>
 </html>
