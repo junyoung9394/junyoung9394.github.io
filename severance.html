@@ -62,8 +62,6 @@
       <button id="btnCalcSev" class="btn-primary">퇴직금 계산하기</button>
     </section>
 
-    <div id="ad-slot-a" class="ad-slot"></div>
-
     <section id="sev-result" class="card result-card" hidden>
       <div class="result-headline">
         <span class="result-label">예상 퇴직금</span>
@@ -75,8 +73,6 @@
         <div class="result-sub"><span class="result-sub-label">계산식</span><span id="sevFormula" class="result-sub-val formula">—</span></div>
       </div>
     </section>
-
-    <div id="ad-slot-b" class="ad-slot"></div>
 
     <section class="card info-card">
       <h2 class="section-title">퇴직금 계산 방법</h2>
@@ -186,8 +182,6 @@
     });
 
     window.addEventListener('load', () => {
-      insertAd('ad-slot-a');
-      insertAd('ad-slot-b');
       insertAd('ad-slot-c');
     });
   </script>
