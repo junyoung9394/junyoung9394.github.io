@@ -85,6 +85,7 @@ flutter run
 - [x] 5. AppMoney (원장 + 보상 정책)
 - [x] 6. 아이템 / 인벤토리 / 상점 (더미 카탈로그)
 - [x] 7. 캐릭터 (6종 × 남녀 각자 선택, 상태 6종)
-- [ ] 8. 커플 연결 + Firebase 동기화
+- [x] 8. 커플 연결 (초대 코드 흐름 — 로컬. 서버 검증은 Firebase 연동 시, `docs/FIREBASE.md`)
+- [ ] 8-1. Firebase 실시간 동기화 (연동 절차: `docs/FIREBASE.md`)
 - [ ] 9. 캐릭터/방 PNG 에셋 적용 (`assets/` 경로 규칙 참고)
 - [ ] 10. Rive 애니메이션

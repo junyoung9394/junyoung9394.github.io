@@ -10,6 +10,7 @@ library;
 import '../models/app_money.dart';
 import '../models/asset_item.dart';
 import '../models/character.dart';
+import '../models/couple.dart';
 import '../models/item.dart';
 import '../models/room.dart';
 import '../models/saving_goal.dart';
@@ -80,6 +81,29 @@ abstract interface class RoomRepository {
 /// 상점 카탈로그 계약. MVP는 로컬 더미 데이터, 추후 Firebase Remote Config/Firestore.
 abstract interface class ShopCatalogRepository {
   Future<List<ItemModel>> loadCatalog();
+}
+
+/// 커플 연결 상태 저장 계약.
+abstract interface class CoupleRepository {
+  Future<CoupleLink?> load();
+
+  Future<void> save(CoupleLink link);
+}
+
+/// 커플 연결(페어링) 동작 계약.
+///
+/// MVP 구현([data/local/local_couple_connector.dart])은 코드 형식만 검증하는
+/// 로컬 시뮬레이션이다. Firebase 연동 시 초대 코드를 Firestore
+/// invites/{code} 문서로 발급/검증하는 구현으로 교체한다 (docs/FIREBASE.md 참고).
+abstract interface class CoupleConnector {
+  /// 내 초대 코드를 발급한다.
+  Future<String> issueInviteCode();
+
+  /// 상대방의 초대 코드로 연결한다. 성공 시 연결된 [CoupleLink] 반환.
+  Future<CoupleLink> connectWithCode(String code);
+
+  /// 연결을 해제한다.
+  Future<void> disconnect();
 }
 
 /// 앱 설정 + 보상 지급 이력 등 단순 key-value 상태 저장 계약.

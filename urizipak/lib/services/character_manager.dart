@@ -63,6 +63,11 @@ class CharacterManager extends ChangeNotifier {
           (_) => reactBoth(CharacterState.celebrate),
         ),
       )
+      ..add(
+        _bus.on<CoupleConnected>().listen(
+          (_) => reactBoth(CharacterState.love),
+        ),
+      )
       ..add(_bus.on<ThemeChanged>().listen((e) => _applyTheme(e.themeId)));
     notifyListeners();
   }

@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/event_bus.dart';
 import '../data/catalog/dummy_shop_catalog.dart';
+import '../data/local/local_couple_connector.dart';
 import '../data/local/local_repositories.dart';
 import '../data/local/local_store.dart';
 import '../services/ads/ad_service.dart';
@@ -10,6 +11,7 @@ import '../services/app_money_ledger.dart';
 import '../services/app_money_service.dart';
 import '../services/asset_service.dart';
 import '../services/character_manager.dart';
+import '../services/couple_service.dart';
 import '../services/goal_service.dart';
 import '../services/inventory_service.dart';
 import '../services/reward_service.dart';
@@ -39,6 +41,7 @@ class AppServices {
     required this.inventory,
     required this.shop,
     required this.theme,
+    required this.couple,
     required this.sync,
     required this.ads,
   });
@@ -54,6 +57,7 @@ class AppServices {
   final InventoryService inventory;
   final ShopService shop;
   final ThemeService theme;
+  final CoupleService couple;
   final SyncService sync;
   final AdService ads;
 
@@ -103,6 +107,11 @@ class AppServices {
     final shop = ShopService(
       catalogRepository: const DummyShopCatalogRepository(),
     );
+    final couple = CoupleService(
+      repository: LocalCoupleRepository(store),
+      connector: LocalCoupleConnector(),
+      bus: bus,
+    );
 
     await Future.wait([
       ledger.init(),
@@ -113,6 +122,7 @@ class AppServices {
       room.init(),
       inventory.init(),
       shop.init(),
+      couple.init(),
     ]);
 
     // 앱 실행 = 출석. (캐릭터 celebrate 반응까지 이벤트로 이어진다)
@@ -130,6 +140,7 @@ class AppServices {
       inventory: inventory,
       shop: shop,
       theme: theme,
+      couple: couple,
       sync: const LocalOnlySyncService(),
       ads: const NoopAdService(),
     );

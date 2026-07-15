@@ -4,6 +4,7 @@ import '../../app/di.dart';
 import '../../core/money.dart';
 import '../../domain/models/character.dart';
 import '../../theme/app_themes.dart';
+import '../couple/couple_connect_screen.dart';
 
 /// 설정 화면: 테마, 캐릭터 선택, 코인 내역.
 class SettingsScreen extends StatelessWidget {
@@ -19,11 +20,26 @@ class SettingsScreen extends StatelessWidget {
           services.theme,
           services.characters,
           services.appMoney.listenable,
+          services.couple,
         ]),
         builder: (context, _) {
           return ListView(
             padding: const EdgeInsets.all(16),
             children: [
+              Card(
+                child: ListTile(
+                  leading: const Text('💕', style: TextStyle(fontSize: 24)),
+                  title: const Text('커플 연결'),
+                  subtitle: Text(services.couple.status.label),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const CoupleConnectScreen(),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
               Text('앱 테마', style: Theme.of(context).textTheme.titleSmall),
               const SizedBox(height: 8),
               Wrap(

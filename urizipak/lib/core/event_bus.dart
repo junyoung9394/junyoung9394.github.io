@@ -72,6 +72,13 @@ class RoomUpdated extends AppEvent {
   const RoomUpdated();
 }
 
+/// 커플 연결이 완료되었다.
+class CoupleConnected extends AppEvent {
+  const CoupleConnected({required this.coupleId});
+
+  final String coupleId;
+}
+
 /// 앱 테마가 변경되었다.
 ///
 /// 지금은 ThemeData만 바뀌지만, 향후 집/버튼/캐릭터 의상/가구/배경 스킨이

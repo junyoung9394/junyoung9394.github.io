@@ -10,6 +10,7 @@ import 'dart:convert';
 import '../../domain/models/app_money.dart';
 import '../../domain/models/asset_item.dart';
 import '../../domain/models/character.dart';
+import '../../domain/models/couple.dart';
 import '../../domain/models/room.dart';
 import '../../domain/models/saving_goal.dart';
 import '../../domain/models/transaction_entry.dart';
@@ -196,6 +197,25 @@ class LocalRoomRepository implements RoomRepository {
   @override
   Future<void> saveRoom(RoomModel room) =>
       _store.write(_key, jsonEncode(room.toJson()));
+}
+
+class LocalCoupleRepository implements CoupleRepository {
+  LocalCoupleRepository(this._store);
+
+  final LocalStore _store;
+
+  static const String _key = 'couple_link';
+
+  @override
+  Future<CoupleLink?> load() async {
+    final raw = await _store.read(_key);
+    if (raw == null || raw.isEmpty) return null;
+    return CoupleLink.fromJson(jsonDecode(raw) as Map<String, dynamic>);
+  }
+
+  @override
+  Future<void> save(CoupleLink link) =>
+      _store.write(_key, jsonEncode(link.toJson()));
 }
 
 class LocalSettingsRepository implements SettingsRepository {
