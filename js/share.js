@@ -13,7 +13,7 @@ function shareKakao({ title, description, imageUrl, linkUrl }) {
     content: {
       title,
       description,
-      imageUrl: imageUrl || 'https://junyoung9394.github.io/icons/icon-512.png',
+      imageUrl: imageUrl || 'https://job.luckygrampus.com/icons/icon-512.png',
       link: { mobileWebUrl: linkUrl || location.href, webUrl: linkUrl || location.href },
     },
     buttons: [{ title: '계산해보기', link: { mobileWebUrl: linkUrl || location.href, webUrl: linkUrl || location.href } }],

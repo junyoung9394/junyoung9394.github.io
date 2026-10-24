@@ -12,8 +12,10 @@ function loadAdSense() {
   document.head.appendChild(s);
 }
 
-// 슬롯 ID는 AdSense 대시보드에서 광고 단위 생성 후 교체
-function insertAd(containerId, slotId = '0000000000') {
+// 기본 슬롯: 같은 계정의 반응형 디스플레이 광고 단위 (welfare 사이트와 공용)
+// 사이트별 성과를 따로 보려면 AdSense에서 새 광고 단위를 만들어 이 값만 교체
+const DEFAULT_SLOT = '4593096138';
+function insertAd(containerId, slotId = DEFAULT_SLOT) {
   const container = document.getElementById(containerId);
   if (!container) return;
   const ins = document.createElement('ins');

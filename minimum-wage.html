@@ -3,22 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2026 최저임금 계산기 — 시급 월급 연봉 주휴수당 자동 계산</title>
-  <meta name="description" content="2026년 최저임금 시급으로 월급·연봉·주휴수당을 자동 계산합니다. 아르바이트, 단기 근무자를 위한 최저임금 계산기.">
+  <title>2027 최저임금 계산기 — 시급 10,700원 월급·연봉·주휴수당 (2026 비교)</title>
+  <meta name="description" content="2027년 최저임금 시급 10,700원(2026년 10,320원 대비 3.7% 인상) 기준으로 월급·연봉·주휴수당을 자동 계산합니다. 2026년 기준과 비교도 가능합니다.">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://junyoung9394.github.io/minimum-wage.html">
-  <meta property="og:title" content="2026 최저임금 계산기">
-  <meta property="og:description" content="2026 최저임금 시급으로 월급·연봉·주휴수당 자동 계산">
-  <meta property="og:image" content="https://junyoung9394.github.io/icons/icon-512.png">
-  <meta property="og:url" content="https://junyoung9394.github.io/minimum-wage.html">
+  <link rel="canonical" href="https://job.luckygrampus.com/minimum-wage.html">
+  <meta property="og:title" content="2027 최저임금 계산기 — 시급 10,700원">
+  <meta property="og:description" content="2027 최저시급 10,700원 기준 월급·연봉·주휴수당 자동 계산 (2026 비교)">
+  <meta property="og:image" content="https://job.luckygrampus.com/icons/icon-512.png">
+  <meta property="og:url" content="https://job.luckygrampus.com/minimum-wage.html">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ko_KR">
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"WebApplication","name":"2026 최저임금 계산기","url":"https://junyoung9394.github.io/minimum-wage.html","applicationCategory":"FinanceApplication","inLanguage":"ko","isAccessibleForFree":true}
+  {"@context":"https://schema.org","@type":"WebApplication","name":"2027 최저임금 계산기","url":"https://job.luckygrampus.com/minimum-wage.html","applicationCategory":"FinanceApplication","inLanguage":"ko","isAccessibleForFree":true}
   </script>
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" href="/icons/icon-192.png">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <link rel="stylesheet" href="/styles.css">
+  <meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#101114" media="(prefers-color-scheme: dark)">
 </head>
 <body>
   <header class="site-header">
@@ -34,12 +38,16 @@
   </header>
 
   <main class="container">
-    <h1>2026 최저임금 계산기</h1>
-    <p class="subtitle">주 근무시간을 입력하면 시급·월급·연봉·주휴수당을 자동 계산합니다</p>
+    <div class="page-head">
+      <span class="eyebrow">2027년 1월 1일 시행 · 고용노동부 고시</span>
+      <h1>2027 최저임금 계산기</h1>
+      <p class="subtitle">주 근무시간을 입력하면 시급·월급·연봉·주휴수당을 자동 계산합니다</p>
+    </div>
+    <div class="year-toggle" data-year-toggle></div>
 
     <section class="card mw-badge-card">
       <div class="mw-badge">
-        <span class="mw-badge-label">2026 최저시급</span>
+        <span class="mw-badge-label" id="mwYearLabel">최저시급</span>
         <span id="minWageDisplay" class="mw-badge-amount">—</span>
         <span class="mw-badge-label">원 / 시간</span>
       </div>
@@ -60,12 +68,12 @@
 
     <section class="card result-card">
       <div class="result-headline">
-        <span class="result-label">예상 월급</span>
+        <span class="result-label">예상 월급 (주휴수당 포함)</span>
         <span id="mwMonthly" class="result-amount">—</span>
       </div>
       <div class="result-subs">
         <div class="result-sub"><span class="result-sub-label">시급</span><span id="mwHourly" class="result-sub-val">—</span></div>
-        <div class="result-sub"><span class="result-sub-label">주휴수당 포함 월급</span><span id="mwMonthlyWithHoliday" class="result-sub-val">—</span></div>
+        <div class="result-sub"><span class="result-sub-label">기본 월급 (주휴 제외)</span><span id="mwMonthlyWithHoliday" class="result-sub-val">—</span></div>
         <div class="result-sub"><span class="result-sub-label">연봉 (12개월)</span><span id="mwAnnual" class="result-sub-val">—</span></div>
       </div>
     </section>
@@ -102,17 +110,26 @@
   </main>
 
   <footer class="site-footer">
-    <p>※ 2026년 최저임금은 2025년 고용노동부 고시 기준입니다. 변경 시 업데이트됩니다.</p>
+    <p>※ 2027년 최저임금: 고용노동부 고시 제2026-60호(2026.8.5) · 2026년 최저임금: 2025년 고시 기준</p>
     <p>© 2026 연봉계산기 | <a href="/">홈으로</a></p>
   </footer>
 
-  <script src="/js/tax2026.js"></script>
+  <script src="/js/tax.js"></script>
   <script src="/js/adsense.js"></script>
   <script src="/js/share.js"></script>
   <script>
-    const mw = TAX.MINIMUM_WAGE_2026;
-    document.getElementById('minWageDisplay').textContent = mw.toLocaleString('ko-KR');
-    document.getElementById('mwNote').textContent = `2025년 확정 기준 (${mw.toLocaleString()}원/시간) — 전년 대비 인상률 확인 중`;
+    // 최저임금은 고시된 최신 연도를 기본으로 보여줌
+    TAX.setYear(Math.max(...Object.keys(TAX.YEARS).map(Number)));
+    let mw = TAX.MINIMUM_WAGE;
+    function renderBadge() {
+      mw = TAX.MINIMUM_WAGE;
+      const prev = TAX.cfg.prevMinimumWage;
+      const diff = mw - prev;
+      document.getElementById('mwYearLabel').textContent = `${TAX.year} 최저시급`;
+      document.getElementById('minWageDisplay').textContent = mw.toLocaleString('ko-KR');
+      document.getElementById('mwNote').textContent =
+        `전년(${(prev).toLocaleString()}원) 대비 +${diff.toLocaleString()}원 · ${(diff / prev * 100).toFixed(1)}% 인상 · 월 환산(209시간) ${(mw * 209).toLocaleString()}원`;
+    }
 
     function fmt(n) { return n.toLocaleString('ko-KR') + '원'; }
 
@@ -121,7 +138,6 @@
 
     function render(hours) {
       display.textContent = `${hours}시간`;
-      const r = TAX.calcMinimumWage(hours);
       const dailyHours = hours / 5;
       const weeklyHolidayHours = hours >= 15 ? dailyHours : 0;
       const weeklyHolidayPay = Math.round(mw * weeklyHolidayHours);
@@ -129,12 +145,12 @@
       const monthlyHoliday = Math.round(weeklyHolidayPay * (52 / 12));
 
       document.getElementById('mwHourly').textContent = fmt(mw);
-      document.getElementById('mwMonthly').textContent = fmt(monthlyBase);
-      document.getElementById('mwMonthlyWithHoliday').textContent = fmt(monthlyBase + monthlyHoliday);
+      document.getElementById('mwMonthly').textContent = fmt(monthlyBase + monthlyHoliday);
+      document.getElementById('mwMonthlyWithHoliday').textContent = fmt(monthlyBase);
       document.getElementById('mwAnnual').textContent = fmt((monthlyBase + monthlyHoliday) * 12);
 
       document.getElementById('mw-detail-body').innerHTML = [
-        ['시급', fmt(mw), '2026 최저임금'],
+        ['시급', fmt(mw), `${TAX.year} 최저임금`],
         ['주 근무시간', `${hours}시간`, ''],
         ['주급 (기본)', fmt(mw * hours), `${mw.toLocaleString()} × ${hours}h`],
         ['주휴수당', hours >= 15 ? fmt(weeklyHolidayPay) : '해당없음', hours >= 15 ? `주 15시간 이상 개근 시` : '주 15시간 미만'],
@@ -155,6 +171,8 @@
       });
     });
 
+    mountYearToggle(() => { renderBadge(); render(parseInt(slider.value)); });
+    renderBadge();
     render(40);
 
     window.addEventListener('load', () => {

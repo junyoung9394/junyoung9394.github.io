@@ -6,23 +6,27 @@
   <title>나는 연봉 상위 몇%? — 2026 한국 직장인 연봉 백분위 계산기</title>
   <meta name="description" content="내 연봉이 한국 직장인 중 상위 몇 퍼센트인지 계산해보세요. 통계청 2023 임금구조기본조사 기준 연봉 백분위 계산기.">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://junyoung9394.github.io/percentile.html">
+  <link rel="canonical" href="https://job.luckygrampus.com/percentile.html">
 
   <meta property="og:title" content="나는 연봉 상위 몇%? 한국 직장인 연봉 백분위">
   <meta property="og:description" content="내 연봉이 한국 직장인 중 상위 몇%인지 바로 확인! 결과를 카카오톡으로 공유해보세요.">
-  <meta property="og:image" content="https://junyoung9394.github.io/icons/icon-512.png">
-  <meta property="og:url" content="https://junyoung9394.github.io/percentile.html">
+  <meta property="og:image" content="https://job.luckygrampus.com/icons/icon-512.png">
+  <meta property="og:url" content="https://job.luckygrampus.com/percentile.html">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ko_KR">
   <meta name="twitter:card" content="summary_large_image">
 
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"WebApplication","name":"연봉 백분위 계산기","description":"한국 직장인 연봉 백분위 계산기","url":"https://junyoung9394.github.io/percentile.html","applicationCategory":"FinanceApplication","inLanguage":"ko","isAccessibleForFree":true}
+  {"@context":"https://schema.org","@type":"WebApplication","name":"연봉 백분위 계산기","description":"한국 직장인 연봉 백분위 계산기","url":"https://job.luckygrampus.com/percentile.html","applicationCategory":"FinanceApplication","inLanguage":"ko","isAccessibleForFree":true}
   </script>
 
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" href="/icons/icon-192.png">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <link rel="stylesheet" href="/styles.css">
+  <meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#101114" media="(prefers-color-scheme: dark)">
 </head>
 <body>
   <header class="site-header">
@@ -111,7 +115,7 @@
     <p>© 2026 연봉계산기 | <a href="/">홈으로</a></p>
   </footer>
 
-  <script src="/js/tax2026.js"></script>
+  <script src="/js/tax.js"></script>
   <script src="/js/adsense.js"></script>
   <script src="/js/share.js"></script>
   <script>
@@ -207,7 +211,7 @@
       }).join('');
 
       // Share text
-      const shareText = `나는 한국 직장인 연봉 상위 ${top}%!\n내 연봉: ${fmtM(annualWon)} → 월 실수령액 ${fmt(r.netMonthly)}\n당신도 계산해보세요 👉 https://junyoung9394.github.io/percentile.html?salary=${Math.round(annualWon/10000)}`;
+      const shareText = `나는 한국 직장인 연봉 상위 ${top}%!\n내 연봉: ${fmtM(annualWon)} → 월 실수령액 ${fmt(r.netMonthly)}\n당신도 계산해보세요 👉 https://job.luckygrampus.com/percentile.html?salary=${Math.round(annualWon/10000)}`;
       document.getElementById('share-text-box').textContent = shareText;
 
       history.replaceState(null, '', `?salary=${Math.round(annualWon / 10000)}`);

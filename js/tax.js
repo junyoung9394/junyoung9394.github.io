@@ -1,18 +1,53 @@
-// 2026년 한국 소득세 + 4대보험 계산 엔진
-// 세율 기준: 소득세법 제55조 (2025년 개정 반영)
-// 4대보험 요율: 2025년 확정 기준 (2026년 변경 시 하단 상수 수정)
+// 한국 소득세 + 4대보험 계산 엔진 (연도별 기준)
+// 연도별 요율은 YEARS에서 관리 — 새 연도 고시 시 항목만 추가하면 됨
+//
+// 2026: 국민연금 9.5%(근로자 4.75%), 건강보험 7.19%(3.595%), 장기요양 건보료의 13.14%,
+//       고용보험 근로자 0.9%, 국민연금 기준소득월액 상한 659만원(2026.7~2027.6), 최저시급 10,320원
+// 2027: 국민연금 10%(근로자 5%, 연금개혁 일정), 건강보험 7.19% 동결(2026.9 건정심),
+//       최저시급 10,700원(고용노동부 고시 제2026-60호)
+//       ※ 2027 장기요양보험료율은 미발표 — 발표 전까지 2026 비율(13.14%) 적용
+
+const TAX_YEARS = {
+  2026: {
+    minimumWage: 10_320,
+    prevMinimumWage: 10_030,
+    npCap: 6_590_000,
+    rates: {
+      nationalPension: 0.0475,
+      healthInsurance: 0.03595,
+      longTermCare:    0.1314,
+      employment:      0.009,
+    },
+    notes: [],
+  },
+  2027: {
+    minimumWage: 10_700,
+    prevMinimumWage: 10_320,
+    npCap: 6_590_000,
+    rates: {
+      nationalPension: 0.05,
+      healthInsurance: 0.03595,
+      longTermCare:    0.1314,
+      employment:      0.009,
+    },
+    notes: ['2027년 장기요양보험료율은 발표 전이라 2026년 비율(건보료의 13.14%)을 적용했습니다.'],
+  },
+};
 
 const TAX = {
-  // ── 국민연금 월 기준소득월액 상한 (2025년 기준, 2026년 고시 확인 필요)
-  NP_CAP: 6_170_000,
+  YEARS: TAX_YEARS,
+  // 1월 1일부터 자동으로 새 연도 기준이 기본값이 됨
+  year: (() => {
+    const y = new Date().getFullYear();
+    const keys = Object.keys(TAX_YEARS).map(Number);
+    return Math.min(Math.max(y, Math.min(...keys)), Math.max(...keys));
+  })(),
 
-  // ── 4대보험 요율 (근로자 부담분)
-  RATES: {
-    nationalPension:  0.045,   // 9% 중 근로자 4.5%
-    healthInsurance:  0.03545, // 7.09% 중 근로자 3.545%
-    longTermCare:     0.1295,  // 건강보험료의 12.95%
-    employment:       0.009,   // 1.8% 중 근로자 0.9%
-  },
+  setYear(y) { if (TAX_YEARS[y]) TAX.year = Number(y); },
+  get cfg()     { return TAX_YEARS[TAX.year]; },
+  get RATES()   { return TAX.cfg.rates; },
+  get NP_CAP()  { return TAX.cfg.npCap; },
+  get MINIMUM_WAGE() { return TAX.cfg.minimumWage; },
 
   // ── 근로소득공제 (소득세법 제47조)
   earnedIncomeDeduction(annual) {
@@ -23,7 +58,7 @@ const TAX = {
     return 14_750_000;
   },
 
-  // ── 종합소득세율 (소득세법 제55조, 2025 개정)
+  // ── 종합소득세율 (소득세법 제55조)
   incomeTax(taxableIncome) {
     const brackets = [
       { limit: 14_000_000,    rate: 0.06, base: 0           },
@@ -108,16 +143,30 @@ const TAX = {
     if (yearsWorked < 1) return 0;
     return Math.floor(averageMonthly * yearsWorked);
   },
-
-  // ── 최저임금 계산 (2026년 기준 — 2025년 고시 후 업데이트 필요)
-  MINIMUM_WAGE_2026: 10_030, // 원/시간 (2025년 기준; 2026년 결정 후 수정)
-
-  calcMinimumWage(hoursPerWeek = 40) {
-    const hourly  = TAX.MINIMUM_WAGE_2026;
-    const weekly  = hourly * hoursPerWeek;
-    // 주휴수당: 주 15시간 이상 근무 시 발생
-    const weeklyAllowance = hoursPerWeek >= 15 ? hourly * (hoursPerWeek / 40) * 8 : 0;
-    const monthly = Math.round((weekly + weeklyAllowance) * (365 / 7 / 12));
-    return { hourly, weekly: Math.round(weekly), weeklyAllowance: Math.round(weeklyAllowance), monthly };
-  },
 };
+
+// ── 연도 선택 토글: <div class="year-toggle" data-year-toggle></div> 에 렌더링
+function mountYearToggle(onChange) {
+  document.querySelectorAll('[data-year-toggle]').forEach(el => {
+    el.setAttribute('role', 'tablist');
+    el.innerHTML = Object.keys(TAX_YEARS).map(y =>
+      `<button type="button" role="tab" data-year="${y}">${y}년 기준</button>`
+    ).join('');
+    const sync = () => el.querySelectorAll('button').forEach(b =>
+      b.setAttribute('aria-selected', String(Number(b.dataset.year) === TAX.year)));
+    el.addEventListener('click', e => {
+      const b = e.target.closest('button[data-year]');
+      if (!b) return;
+      TAX.setYear(b.dataset.year);
+      document.querySelectorAll('[data-year-toggle]').forEach(t => t.dispatchEvent(new Event('sync')));
+      onChange(TAX.year);
+    });
+    el.addEventListener('sync', sync);
+    sync();
+  });
+  const fromUrl = new URLSearchParams(location.search).get('year');
+  if (fromUrl && TAX_YEARS[fromUrl]) {
+    TAX.setYear(fromUrl);
+    document.querySelectorAll('[data-year-toggle]').forEach(t => t.dispatchEvent(new Event('sync')));
+  }
+}
