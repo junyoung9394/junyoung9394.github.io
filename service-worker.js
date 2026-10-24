@@ -14,6 +14,7 @@ const ASSETS = [
   '/js/adsense.js',
   '/js/share.js',
   '/js/fortune-data.js',
+  '/site-analytics.js',
   '/manifest.json',
   '/icons/icon-192.png',
   '/icons/icon-512.png',
